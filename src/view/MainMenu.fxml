@@ -1,14 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="view.Main"
-            prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <AnchorPane prefHeight="83.0" prefWidth="600.0" style="-fx-background-color: #845ec2;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="24.0" layoutY="2.0" prefHeight="40.0" prefWidth="197.0" text="Appointment System" textFill="#dddddd">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="102.0" fitWidth="77.0" layoutX="477.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Assets/icons8-notes-60.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="14.0" layoutY="22.0" prefHeight="58.0" prefWidth="217.0" text="Main Menu" textFill="#dddddd">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="370.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="27.0" layoutY="307.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Logout and Exit" textFill="#dddddd" />
+            <Button layoutX="27.0" layoutY="254.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Reports" textFill="#dddddd" />
+            <Button layoutX="27.0" layoutY="198.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Modify Appointment" textFill="#dddddd" />
+            <Button layoutX="27.0" layoutY="140.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Add Appointment" textFill="#dddddd" />
+            <Button layoutX="27.0" layoutY="85.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Modify Customer" textFill="#dddddd" />
+            <Button layoutX="27.0" layoutY="26.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076;" text="Add Customer" textFill="#dddddd" />
+            <AnchorPane layoutX="169.0" layoutY="15.0" prefHeight="320.0" prefWidth="406.0">
+               <children>
+                  <Label layoutX="23.0" layoutY="14.0" text="Scheduled Appointments" textFill="#4d8076">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <RadioButton layoutX="185.0" layoutY="14.0" mnemonicParsing="false" text="All" textFill="#4d8076" />
+                  <RadioButton layoutX="236.0" layoutY="14.0" mnemonicParsing="false" text="By Week" textFill="#4d8076" />
+                  <RadioButton layoutX="321.0" layoutY="14.0" mnemonicParsing="false" text="By Month" textFill="#4d8076" />
+                  <DatePicker layoutX="113.0" layoutY="40.0" prefHeight="26.0" prefWidth="195.0" />
+                  <ComboBox layoutX="321.0" layoutY="40.0" prefHeight="26.0" prefWidth="76.0" />
+                  <TableView layoutX="23.0" layoutY="73.0" prefHeight="247.0" prefWidth="374.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </bottom>
+</BorderPane>
