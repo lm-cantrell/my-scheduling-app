@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCustomerController">
    <top>
       <AnchorPane prefHeight="85.0" prefWidth="200.0" style="-fx-background-color: #845ec2 #845ec2;" BorderPane.alignment="CENTER">
          <children>
@@ -60,23 +59,23 @@
                   </Label>
                </children>
             </AnchorPane>
-            <Button layoutX="22.0" layoutY="274.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Add" textFill="#dddddd">
+            <Button fx:id="addCustAddButton" layoutX="22.0" layoutY="274.0" mnemonicParsing="false" onAction="#onActionAddCust" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Add" textFill="#dddddd">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button layoutX="22.0" layoutY="311.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Cancel" textFill="#dddddd">
+            <Button fx:id="addCustCancelButton" layoutX="22.0" layoutY="311.0" mnemonicParsing="false" onAction="#onActionCancel" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Cancel" textFill="#dddddd">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <TextField layoutX="106.0" layoutY="18.0" opacity="0.4" />
-            <TextField layoutX="106.0" layoutY="53.0" opacity="0.4" />
-            <TextField layoutX="106.0" layoutY="88.0" opacity="0.4" />
-            <TextField layoutX="106.0" layoutY="123.0" opacity="0.4" />
-            <TextField layoutX="106.0" layoutY="162.0" opacity="0.4" />
-            <ComboBox layoutX="114.0" layoutY="200.0" prefWidth="150.0" />
-            <ComboBox layoutX="114.0" layoutY="236.0" prefWidth="150.0" />
+            <TextField fx:id="addCustIdTxt" layoutX="106.0" layoutY="18.0" opacity="0.4" />
+            <TextField fx:id="addCustNameTxt" layoutX="106.0" layoutY="53.0" opacity="0.4" />
+            <TextField fx:id="addCustAdressTxt" layoutX="106.0" layoutY="88.0" opacity="0.4" />
+            <TextField fx:id="addCustPostCodeTxt" layoutX="106.0" layoutY="123.0" opacity="0.4" />
+            <TextField fx:id="addCustPhoneTxt" layoutX="106.0" layoutY="162.0" opacity="0.4" />
+            <ComboBox fx:id="addCustCountryCombo" layoutX="114.0" layoutY="200.0" prefWidth="150.0" />
+            <ComboBox fx:id="addCustDivCombo" layoutX="114.0" layoutY="236.0" prefWidth="150.0" />
          </children>
       </AnchorPane>
    </bottom>

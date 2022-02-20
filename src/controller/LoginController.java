@@ -4,21 +4,32 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ReportsController implements Initializable {
+public class LoginController implements Initializable {
 
     @FXML
-    private ToggleGroup reportType;
+    private Button exitButton;
 
     @FXML
-    private Button reportsExitButton;
+    private Button loginButton;
 
     @FXML
-    void onActionExit(ActionEvent event) {
+    private TextField passwordText;
+
+    @FXML
+    private TextField usernameText;
+
+    @FXML
+    void onActionExitApplication(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionLogin(ActionEvent event) {
 
     }
 

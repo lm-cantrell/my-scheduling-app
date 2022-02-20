@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <left>
       <AnchorPane prefHeight="407.0" prefWidth="228.0" style="-fx-background-color: #845ec2;" BorderPane.alignment="CENTER">
          <children>
@@ -45,14 +44,14 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField layoutX="106.0" layoutY="151.0" opacity="0.4" promptText="username" />
-            <TextField layoutX="106.0" layoutY="201.0" opacity="0.4" promptText="password" />
-            <Button layoutX="35.0" layoutY="257.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="228.0" style="-fx-background-color: #4D8076#4D8076;" text="Login" textFill="#dddddd">
+            <TextField fx:id="usernameText" layoutX="106.0" layoutY="151.0" opacity="0.4" promptText="username" />
+            <TextField fx:id="passwordText" layoutX="106.0" layoutY="201.0" opacity="0.4" promptText="password" />
+            <Button fx:id="loginButton" layoutX="35.0" layoutY="257.0" mnemonicParsing="false" onAction="#onActionLogin" prefHeight="26.0" prefWidth="228.0" style="-fx-background-color: #4D8076#4D8076;" text="Login" textFill="#dddddd">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button layoutX="34.0" layoutY="310.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="230.0" style="-fx-background-color: #4D8076#4D8076;" text="Cancel" textFill="#dddddd">
+            <Button fx:id="exitButton" layoutX="34.0" layoutY="310.0" mnemonicParsing="false" onAction="#onActionExitApplication" prefHeight="26.0" prefWidth="230.0" style="-fx-background-color: #4D8076#4D8076;" text="Cancel and Exit" textFill="#dddddd">
                <font>
                   <Font size="14.0" />
                </font>

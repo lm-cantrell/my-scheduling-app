@@ -7,16 +7,16 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
    <top>
-      <AnchorPane prefHeight="83.0" prefWidth="600.0" style="-fx-background-color: #845ec2;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="85.0" prefWidth="600.0" style="-fx-background-color: #845ec2;" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" layoutX="24.0" layoutY="2.0" prefHeight="40.0" prefWidth="197.0" text="Appointment System" textFill="#dddddd">
                <font>
@@ -39,12 +39,12 @@
    <bottom>
       <AnchorPane prefHeight="370.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="27.0" layoutY="307.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Logout and Exit" textFill="#dddddd" />
-            <Button layoutX="27.0" layoutY="254.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Reports" textFill="#dddddd" />
-            <Button layoutX="27.0" layoutY="198.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Modify Appointment" textFill="#dddddd" />
-            <Button layoutX="27.0" layoutY="140.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Add Appointment" textFill="#dddddd" />
-            <Button layoutX="27.0" layoutY="85.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Modify Customer" textFill="#dddddd" />
-            <Button layoutX="27.0" layoutY="26.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076;" text="Add Customer" textFill="#dddddd" />
+            <Button fx:id="logoutButton" layoutX="27.0" layoutY="307.0" mnemonicParsing="false" onAction="#onActionExit" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Logout and Exit" textFill="#dddddd" />
+            <Button fx:id="reportsButton" layoutX="27.0" layoutY="254.0" mnemonicParsing="false" onAction="#onActionNavReports" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Reports" textFill="#dddddd" />
+            <Button fx:id="modifyAppointmentButton" layoutX="27.0" layoutY="198.0" mnemonicParsing="false" onAction="#onActionNavModifyAppointment" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Modify Appointment" textFill="#dddddd" />
+            <Button fx:id="addAppointmentButton" layoutX="27.0" layoutY="140.0" mnemonicParsing="false" onAction="#onActionNavAddAppointment" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Add Appointment" textFill="#dddddd" />
+            <Button fx:id="modifyCustButton" layoutX="27.0" layoutY="85.0" mnemonicParsing="false" onAction="#onActionNavModifyCust" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076#4d8076;" text="Modify Customer" textFill="#dddddd" />
+            <Button fx:id="addCustomerButton" layoutX="27.0" layoutY="26.0" mnemonicParsing="false" onAction="#onActionNavAddCust" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4d8076;" text="Add Customer" textFill="#dddddd" />
             <AnchorPane layoutX="169.0" layoutY="15.0" prefHeight="320.0" prefWidth="406.0">
                <children>
                   <Label layoutX="23.0" layoutY="14.0" text="Scheduled Appointments" textFill="#4d8076">
@@ -52,9 +52,12 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <RadioButton layoutX="185.0" layoutY="14.0" mnemonicParsing="false" text="All" textFill="#4d8076" />
-                  <RadioButton layoutX="236.0" layoutY="14.0" mnemonicParsing="false" text="By Week" textFill="#4d8076" />
-                  <RadioButton layoutX="321.0" layoutY="14.0" mnemonicParsing="false" text="By Month" textFill="#4d8076" />
+                  <RadioButton fx:id="allApptsRadioButton" layoutX="185.0" layoutY="14.0" mnemonicParsing="false" onAction="#onActionShowAll" text="All" textFill="#4d8076">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="appointmentFilter" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="weekApptFilterButton" layoutX="236.0" layoutY="14.0" mnemonicParsing="false" onAction="#onActionShowByWeek" text="By Week" textFill="#4d8076" toggleGroup="$appointmentFilter" />
+                  <RadioButton fx:id="monthApptFilterButton" layoutX="321.0" layoutY="14.0" mnemonicParsing="false" onAction="#onActionShowByMonth" text="By Month" textFill="#4d8076" toggleGroup="$appointmentFilter" />
                   <DatePicker layoutX="113.0" layoutY="40.0" prefHeight="26.0" prefWidth="195.0" />
                   <ComboBox layoutX="321.0" layoutY="40.0" prefHeight="26.0" prefWidth="76.0" />
                   <TableView layoutX="23.0" layoutY="73.0" prefHeight="247.0" prefWidth="374.0">

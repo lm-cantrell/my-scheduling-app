@@ -1,14 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="view.UpdateAppointment"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UpdateAppointmentController">
+    <top>
+        <AnchorPane prefHeight="85.0" prefWidth="200.0" style="-fx-background-color: #845ec2 #845ec2;" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" layoutX="24.0" layoutY="2.0" prefHeight="40.0" prefWidth="197.0" text="Appointment System" textFill="#dddddd">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" layoutX="14.0" layoutY="22.0" prefHeight="58.0" prefWidth="300.0" text="Update Appointment" textFill="#dddddd">
+                    <font>
+                        <Font size="32.0" />
+                    </font>
+                </Label>
+                <ImageView fitHeight="102.0" fitWidth="77.0" layoutX="477.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Assets/icons8-notes-60.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+    </top>
+    <bottom>
+        <AnchorPane prefHeight="366.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label layoutX="21.0" layoutY="22.0" text="ID" textFill="#4d8076" />
+                <Label layoutX="21.0" layoutY="57.0" text="Title" textFill="#4d8076" />
+                <Label layoutX="21.0" layoutY="94.0" text="Description" textFill="#4d8076" />
+                <Label layoutX="21.0" layoutY="129.0" text="Location" textFill="#4d8076" />
+                <Label layoutX="21.0" layoutY="167.0" text="Contact" textFill="#4d8076" />
+                <Label layoutX="21.0" layoutY="204.0" prefHeight="17.0" prefWidth="51.0" text="Type" textFill="#4d8076" />
+                <Label layoutX="21.0" layoutY="240.0" prefHeight="17.0" prefWidth="86.0" text="CustomerID" textFill="#4d8076" />
+                <AnchorPane layoutX="278.0" layoutY="1.0" prefHeight="363.0" prefWidth="322.0">
+                    <children>
+                        <Label alignment="CENTER" layoutY="15.0" prefHeight="18.0" prefWidth="66.0" text="Start Date" textFill="#4d8076">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <DatePicker fx:id="updateApptStartDatePick" layoutX="66.0" layoutY="11.0" onAction="#onActionFilterStart" prefHeight="26.0" prefWidth="129.0" />
+                        <Label layoutX="202.0" layoutY="16.0" text="Time" textFill="#4d8076" />
+                        <ComboBox fx:id="updateApptStartTimeCombo" layoutX="237.0" layoutY="12.0" prefHeight="26.0" prefWidth="68.0" />
+                        <TableView layoutX="7.0" layoutY="44.0" prefHeight="135.0" prefWidth="297.0">
+                            <columns>
+                                <TableColumn prefWidth="75.0" text="C1" />
+                                <TableColumn prefWidth="75.0" text="C2" />
+                            </columns>
+                        </TableView>
+                        <Label alignment="CENTER" layoutX="4.0" layoutY="191.0" prefHeight="18.0" prefWidth="59.0" text="End Date" textFill="#4d8076">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <DatePicker fx:id="updateApptEndDatePick" layoutX="66.0" layoutY="187.0" onAction="#onActionFilterEnd" prefHeight="26.0" prefWidth="129.0" />
+                        <Label layoutX="202.0" layoutY="192.0" text="Time" textFill="#4d8076" />
+                        <ComboBox fx:id="updateApptEndTimeCombo" layoutX="237.0" layoutY="187.0" prefHeight="26.0" prefWidth="68.0" />
+                        <TableView layoutX="7.0" layoutY="221.0" prefHeight="135.0" prefWidth="297.0">
+                            <columns>
+                                <TableColumn prefWidth="75.0" text="C1" />
+                                <TableColumn prefWidth="75.0" text="C2" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+                <Button fx:id="updateApptUpdateButton" layoutX="11.0" layoutY="300.0" mnemonicParsing="false" onAction="#onActionUpdateAppt" prefHeight="27.0" prefWidth="116.0" style="-fx-background-color: #4d8076#4d8076;" text="Update" textFill="#dddddd">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="updateApptCancelButton" layoutX="11.0" layoutY="332.0" mnemonicParsing="false" onAction="#onActionCancel" prefHeight="27.0" prefWidth="116.0" style="-fx-background-color: #4d8076#4d8076;" text="Cancel" textFill="#dddddd">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <TextField fx:id="updateApptIdTxt" layoutX="106.0" layoutY="18.0" opacity="0.4" />
+                <TextField fx:id="updateApptTitleTxt" layoutX="106.0" layoutY="53.0" opacity="0.4" />
+                <TextField fx:id="updateApptDescTxt" layoutX="106.0" layoutY="88.0" opacity="0.4" />
+                <TextField fx:id="updateApptLocationTxt" layoutX="106.0" layoutY="123.0" opacity="0.4" />
+                <TextField fx:id="updateApptContactTxt" layoutX="106.0" layoutY="162.0" opacity="0.4" />
+                <Label layoutX="21.0" layoutY="274.0" prefHeight="17.0" prefWidth="86.0" text="UserID" textFill="#4d8076" />
+                <TextField fx:id="updateApptTypeTxt" layoutX="106.0" layoutY="200.0" opacity="0.4" />
+                <TextField fx:id="updateApptCustIdTxt" layoutX="106.0" layoutY="236.0" opacity="0.4" />
+                <TextField fx:id="updateApptUserIdTxt" layoutX="106.0" layoutY="270.0" opacity="0.4" />
+            <Button fx:id="updateApptDeleteButton" layoutX="132.0" layoutY="300.0" mnemonicParsing="false" onAction="#onActionDeleteAppt" prefHeight="27.0" prefWidth="140.0" style="-fx-background-color: #4d8076#4d8076;" text="Delete Appointment" textFill="#dddddd">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            </children>
+        </AnchorPane>
+    </bottom>
+</BorderPane>

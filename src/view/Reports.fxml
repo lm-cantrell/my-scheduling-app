@@ -3,13 +3,14 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReportsController">
     <top>
         <AnchorPane prefHeight="85.0" prefWidth="200.0" style="-fx-background-color: #845ec2 #845ec2;" BorderPane.alignment="CENTER">
             <children>
@@ -43,14 +44,17 @@
                         </Label>
                     </children>
                 </AnchorPane>
-                <Button layoutX="11.0" layoutY="332.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="116.0" style="-fx-background-color: #4d8076#4d8076;" text="Exit Reports" textFill="#dddddd">
+                <Button fx:id="reportsExitButton" layoutX="11.0" layoutY="320.0" mnemonicParsing="false" onAction="#onActionExit" prefHeight="27.0" prefWidth="116.0" style="-fx-background-color: #4d8076#4d8076;" text="Exit Reports" textFill="#dddddd">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Button>
-            <RadioButton layoutX="23.0" layoutY="28.0" mnemonicParsing="false" text="Report One" textFill="#4d8076" />
-            <RadioButton layoutX="23.0" layoutY="120.0" mnemonicParsing="false" text="Report Two" textFill="#4d8076" />
-            <RadioButton layoutX="23.0" layoutY="220.0" mnemonicParsing="false" text="Report Three" textFill="#4d8076" />
+            <RadioButton layoutX="23.0" layoutY="28.0" mnemonicParsing="false" text="Report One" textFill="#4d8076">
+               <toggleGroup>
+                  <ToggleGroup fx:id="reportType" />
+               </toggleGroup></RadioButton>
+            <RadioButton layoutX="23.0" layoutY="126.0" mnemonicParsing="false" text="Report Two" textFill="#4d8076" toggleGroup="$reportType" />
+            <RadioButton layoutX="23.0" layoutY="220.0" mnemonicParsing="false" text="Report Three" textFill="#4d8076" toggleGroup="$reportType" />
             </children>
         </AnchorPane>
     </bottom>
