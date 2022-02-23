@@ -5,21 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9dde9f8b-37ff-4191-9fbb-6a987152dca0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/helper/JDBC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/controller/AddAppointmentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java/controller/AddAppointmentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/controller/AddCustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java/controller/AddCustomerController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/controller/MainMenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java/controller/MainMenuController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/controller/ReportsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java/controller/ReportsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/controller/UpdateAppointmentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java/controller/UpdateAppointmentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/controller/UpdateCustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java/controller/UpdateCustomerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java.iml" beforeDir="false" afterPath="$PROJECT_DIR$/java.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/java/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/AddAppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AddAppointmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/AddCustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AddCustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ReportsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ReportsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/UpdateAppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/UpdateAppointmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/UpdateCustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/UpdateCustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +42,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
@@ -81,7 +71,7 @@
       <option name="presentableId" value="Default" />
       <updated>1645039175540</updated>
       <workItem from="1645039179662" duration="12988000" />
-      <workItem from="1645320140481" duration="8363000" />
+      <workItem from="1645320140481" duration="13762000" />
     </task>
     <servers />
   </component>
