@@ -15,7 +15,7 @@
          <children>
             <ImageView fitHeight="155.0" fitWidth="180.0" layoutX="37.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Assets/icons8-notes-240.png" />
+                  <Image url="@../assets/icons8-notes-240.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" layoutX="3.0" layoutY="231.0" prefHeight="41.0" prefWidth="219.0" text="Appointment System" textFill="#dddddd">
@@ -31,7 +31,7 @@
          <children>
             <ImageView fitHeight="51.0" fitWidth="77.0" layoutX="121.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Assets/lock.png" />
+                  <Image url="@../assets/lock.png" />
                </image>
             </ImageView>
             <Label layoutX="26.0" layoutY="152.0" prefHeight="22.0" prefWidth="79.0" text="Username:" textFill="#4d8076">
