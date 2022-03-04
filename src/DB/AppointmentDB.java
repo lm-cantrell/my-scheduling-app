@@ -43,7 +43,32 @@ public abstract class AppointmentDB {
     //update
     public static int update(int id, String title, String desc, String loc, String type, LocalDateTime start, LocalDateTime end, int custId, int userId, int contactId) throws SQLException{
         System.out.println("appointment update called");
-        return 0;
+        String sql = "UPDATE APPOINTMENTS SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
+
+        PreparedStatement ps = null;
+
+        try{
+            ps = JDBC.connection.prepareStatement(sql);
+            ps.setString(1, title);
+            ps.setString(2, desc);
+            ps.setString(3, loc);
+            ps.setString(4, type);
+            ps.setTimestamp(5, Timestamp.valueOf(start));
+            ps.setTimestamp(6, Timestamp.valueOf(end));
+            ps.setInt(7, custId);
+            ps.setInt(8, userId);
+            ps.setInt(9, contactId);
+            ps.setInt(10, id);
+
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected;
+        } finally {
+            if(ps != null) {
+                ps.close();
+            }
+        }
+
+
     }
 
     //delete

@@ -44,11 +44,11 @@ public class Main extends Application {
 
         //test appt insert
 
-        AppointmentDB.insert("test title", "test description", "test location", "test type",
-                ldtTest, ldtTest2, 1, 1, 1);
+//        AppointmentDB.insert("test title", "test description", "test location", "test type",
+//                ldtTest, ldtTest2, 1, 1, 1);
         //test appt update
-//        AppointmentDB.update(3, "test title", "test description", "test location", "test type",
-//                ldtTest, ldtTest2, 2, 3, 1);
+        AppointmentDB.update(4, "update test", "updated description", "updated location", "updated type",
+                ldtTest, ldtTest2, 1, 1, 1);
 
         //test appt del
 //        AppointmentDB.delete(1);
