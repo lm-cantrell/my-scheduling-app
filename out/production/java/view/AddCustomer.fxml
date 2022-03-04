@@ -28,7 +28,7 @@
             </Label>
             <ImageView fitHeight="102.0" fitWidth="77.0" layoutX="477.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Assets/icons8-notes-60.png" />
+                  <Image url="@../assets/icons8-notes-60.png" />
                </image>
             </ImageView>
          </children>
