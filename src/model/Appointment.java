@@ -1,18 +1,20 @@
 package model;
 
+import java.time.LocalDateTime;
+
 public class Appointment {
     private int appointmentId;
     private String title;
     private String description;
     private String location;
     private String type;
-    private String startDateTime;
-    private String endDateTime;
-    private String assocCustId;
-    private String assocUserId;
-    private String assocContactId;
+    private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
+    private int assocCustId;
+    private int assocUserId;
+    private int assocContactId;
 
-    public Appointment(int appointmentId, String title, String description, String location, String type, String startDateTime, String endDateTime, String assocCustId, String assocUserId, String assocContactId) {
+    public Appointment(int appointmentId, String title, String description, String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime, int assocCustId, int assocUserId, int assocContactId) {
         this.appointmentId = appointmentId;
         this.title = title;
         this.description = description;
@@ -65,43 +67,43 @@ public class Appointment {
         this.type = type;
     }
 
-    public String getStartDateTime() {
+    public LocalDateTime getStartDateTime() {
         return startDateTime;
     }
 
-    public void setStartDateTime(String startDateTime) {
+    public void setStartDateTime(LocalDateTime startDateTime) {
         this.startDateTime = startDateTime;
     }
 
-    public String getEndDateTime() {
+    public LocalDateTime getEndDateTime() {
         return endDateTime;
     }
 
-    public void setEndDateTime(String endDateTime) {
+    public void setEndDateTime(LocalDateTime endDateTime) {
         this.endDateTime = endDateTime;
     }
 
-    public String getAssocCustId() {
+    public int getAssocCustId() {
         return assocCustId;
     }
 
-    public void setAssocCustId(String assocCustId) {
+    public void setAssocCustId(int assocCustId) {
         this.assocCustId = assocCustId;
     }
 
-    public String getAssocUserId() {
+    public int getAssocUserId() {
         return assocUserId;
     }
 
-    public void setAssocUserId(String assocUserId) {
+    public void setAssocUserId(int assocUserId) {
         this.assocUserId = assocUserId;
     }
 
-    public String getAssocContactId() {
+    public int getAssocContactId() {
         return assocContactId;
     }
 
-    public void setAssocContactId(String assocContactId) {
+    public void setAssocContactId(int assocContactId) {
         this.assocContactId = assocContactId;
     }
 
