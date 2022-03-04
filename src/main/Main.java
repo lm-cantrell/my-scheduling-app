@@ -1,6 +1,6 @@
 package main;
 
-import DB.CustomerDB;
+import DB.AppointmentDB;
 import DB.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class Main extends Application {
 
@@ -25,17 +26,35 @@ public class Main extends Application {
         JDBC.openConnection();
 
 
-        //test insert
-        CustomerDB.insert("lisa", "123 place", "444", "555-555-5555", 1);
+        //test cust insert
+//        CustomerDB.insert("lisa", "123 place", "444", "555-555-5555", 1);
 
-//        test update
-//        CustomerDB.update(4, "lisaC", "567 road", "444", "555-555-5555", 1);
+//        test cust update
+//        CustomerDB.update(5, "lisaC", "567 road", "444", "555-555-5555", 1);
 
-//        test delete
-//        CustomerDB.delete(4);
+//        test cust delete
+//        CustomerDB.delete(5);
 
-//        test select
-//        CustomerDB.select(3);
+//        test cust select
+//        CustomerDB.select(1);
+
+
+        LocalDateTime ldtTest = LocalDateTime.now();
+        LocalDateTime ldtTest2 = LocalDateTime.now();
+
+        //test appt insert
+
+        AppointmentDB.insert("test title", "test description", "test location", "test type",
+                ldtTest, ldtTest2, 1, 1, 1);
+        //test appt update
+//        AppointmentDB.update(3, "test title", "test description", "test location", "test type",
+//                ldtTest, ldtTest2, 2, 3, 1);
+
+        //test appt del
+//        AppointmentDB.delete(1);
+
+        //test appt select
+//        AppointmentDB.select(1);
 
         launch(args);
 

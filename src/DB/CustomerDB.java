@@ -16,7 +16,7 @@ public abstract class CustomerDB {
         String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES(?, ?, ?, ?, ?)";
 
         PreparedStatement ps = null;
-        ResultSet rs = null;
+
         try{
             ps = JDBC.connection.prepareStatement(sql);
             ps.setString(1, name);
@@ -33,9 +33,6 @@ public abstract class CustomerDB {
             if(ps != null) {
                 ps.close();
             }
-            if(rs != null) {
-                rs.close();
-            }
         }
 
     }
@@ -44,71 +41,117 @@ public abstract class CustomerDB {
         System.out.println("customer update called");
         String sql = "UPDATE CUSTOMERS SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
 
-        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-        ps.setString(1, name);
-        ps.setString(2, address);
-        ps.setString(3, postalCode);
-        ps.setString(4, phoneNum);
-        ps.setInt(5, divId);
-        ps.setInt(6, id);
+        PreparedStatement ps = null;
 
-        int rowsAffected = ps.executeUpdate();
+        try{
+            ps = JDBC.connection.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, address);
+            ps.setString(3, postalCode);
+            ps.setString(4, phoneNum);
+            ps.setInt(5, divId);
+            ps.setInt(6, id);
 
-        return rowsAffected;
+            int rowsAffected = ps.executeUpdate();
+            System.out.println("update executed");
+            return rowsAffected;
+        } finally {
+            if(ps != null) {
+                ps.close();
+            }
+        }
+
     }
 
     public static int delete(int id) throws SQLException{
         System.out.println("customer delete called");
         String sql = "DELETE FROM CUSTOMERS WHERE Customer_ID = ?";
+        PreparedStatement ps = null;
 
-        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-        ps.setInt(1, id);
+        try{
+            ps = JDBC.connection.prepareStatement(sql);
+            ps.setInt(1, id);
 
-        int rowsAffected = ps.executeUpdate();
+            int rowsAffected = ps.executeUpdate();
 
-        return rowsAffected;
+            return rowsAffected;
+        } finally {
+            if(ps != null) {
+                ps.close();
+            }
+        }
+
     }
 
     public static ObservableList select() throws SQLException{
         String sql = "SELECT * FROM CUSTOMERS";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
-        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
+        try{
+            ps = JDBC.connection.prepareStatement(sql);
+            rs = ps.executeQuery();
 
-        ObservableList<Customer> allCustList = FXCollections.observableArrayList();
+            ObservableList<Customer> allCustList = FXCollections.observableArrayList();
 
-        while (rs.next()){
-            int custId = rs.getInt("Customer_ID");
-            String custName = rs.getString("Customer_Name");
-            String address = rs.getString("Address");
-            String postCode = rs.getString("Postal_Code");
-            String phone = rs.getString("Phone");
-            int divId = rs.getInt("Division_ID");
+            while (rs.next()){
+                int custId = rs.getInt("Customer_ID");
+                String custName = rs.getString("Customer_Name");
+                String address = rs.getString("Address");
+                String postCode = rs.getString("Postal_Code");
+                String phone = rs.getString("Phone");
+                int divId = rs.getInt("Division_ID");
 
-            Customer currCustomer = new Customer(custId, custName, address, postCode, phone, divId);
-            allCustList.add(currCustomer);
-            System.out.println(custId + " | " + custName + " | " + address + " | " + postCode + " | " + phone + " | " + divId);
+                Customer currCustomer = new Customer(custId, custName, address, postCode, phone, divId);
+                allCustList.add(currCustomer);
+                System.out.println(custId + " | " + custName + " | " + address + " | " + postCode + " | " + phone + " | " + divId);
+            }
+
+            return allCustList;
+        } finally {
+            if(ps != null) {
+                ps.close();
+            }
+            if(rs != null){
+                rs.close();
+            }
         }
 
-        return allCustList;
 
     }
 
-    public static void select(int id) throws SQLException{
+    public static ObservableList select(int id) throws SQLException{
         String sql = "SELECT * FROM CUSTOMERS WHERE Customer_ID = ?";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
-        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-        ps.setInt(1, id);
+        try{
+            ps = JDBC.connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
 
-        ResultSet rs = ps.executeQuery();
-        while(rs.next()){
-            int custId = rs.getInt("Customer_ID");
-            String custName = rs.getString("Customer_Name");
-            String address = rs.getString("Address");
-            String postCode = rs.getString("Postal_Code");
-            String phone = rs.getString("Phone");
-            int divId = rs.getInt("Division_ID");
-            System.out.println(custId + " | " + custName + " | " + address + " | " + postCode + " | " + phone + " | " + divId);
+            ObservableList<Customer> allCustList = FXCollections.observableArrayList();
+
+            while (rs.next()){
+                int custId = rs.getInt("Customer_ID");
+                String custName = rs.getString("Customer_Name");
+                String address = rs.getString("Address");
+                String postCode = rs.getString("Postal_Code");
+                String phone = rs.getString("Phone");
+                int divId = rs.getInt("Division_ID");
+
+                Customer currCustomer = new Customer(custId, custName, address, postCode, phone, divId);
+                allCustList.add(currCustomer);
+                System.out.println(custId + " | " + custName + " | " + address + " | " + postCode + " | " + phone + " | " + divId);
+            }
+            return allCustList;
+        } finally {
+            if(ps != null) {
+                ps.close();
+            }
+            if(rs != null){
+                rs.close();
+            }
         }
     }
 }
