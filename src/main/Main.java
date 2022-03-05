@@ -1,7 +1,7 @@
 package main;
 
-import DB.AppointmentDB;
 import DB.JDBC;
+import DB.UserDB;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -54,7 +54,10 @@ public class Main extends Application {
 //        AppointmentDB.delete(4);
 
         //test appt select
-        AppointmentDB.select(1);
+//        AppointmentDB.select(1);
+
+        //test user select
+        UserDB.selectCurrUser("test", "test");
 
         launch(args);
 
