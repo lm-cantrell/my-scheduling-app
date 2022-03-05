@@ -1,14 +1,13 @@
 package controller;
 
+import helper.Alerts;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -59,9 +58,10 @@ public class MainMenuController implements Initializable {
 
     @FXML
     void onActionExit(ActionEvent event) {
-
-        //implement exit alert/confirmation
-        System.exit(0);
+        Alert alert = Alerts.confirmExit();
+        if(alert.showAndWait().get() == ButtonType.OK) {
+            System.exit(0);
+        }
     }
 
     @FXML
