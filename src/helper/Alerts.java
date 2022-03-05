@@ -10,4 +10,11 @@ public class Alerts {
         alert.setContentText("Are you sure you want to exit the application?");
         return alert;
     }
+
+    public static Alert customErrorAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setContentText(message);
+        return alert;
+    }
 }

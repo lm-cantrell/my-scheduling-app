@@ -1,5 +1,6 @@
 package controller;
 
+import DB.UserDB;
 import helper.Alerts;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -51,8 +53,19 @@ public class LoginController implements Initializable {
         //implement password verification
 
         try {
+            String userName = usernameText.getText();
+            String password = passwordText.getText();
+
+            int currUserId = UserDB.getUserIDFromLogin(userName, password);
+
+            if( currUserId == 0) {
+
+            }
+
+
+
             navigateViews(mainMenuPath, event);
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
     }

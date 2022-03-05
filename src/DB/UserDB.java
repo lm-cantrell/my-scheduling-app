@@ -8,9 +8,39 @@ import java.sql.SQLException;
 
 public abstract class UserDB {
 
-    public static User selectCurrUser(String username, String password) throws SQLException {
-        System.out.println("logging in");
+    public static int getUserIDFromLogin(String username, String password) throws SQLException {
         String sql = "SELECT * FROM users WHERE User_Name = ? AND Password = ?";
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = JDBC.connection.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+
+            if(rs.next() == false) {
+                return 0;
+            } else {
+                int userId = rs.getInt("User_ID");
+                System.out.println(userId);
+                return userId;
+            }
+        } finally {
+            if(ps != null) {
+                ps.close();
+            }
+            if(rs != null){
+                rs.close();
+            }
+        }
+
+
+    }
+
+    public static User selectCurrUser(int userId) throws SQLException {
+        String sql = "SELECT * FROM users WHERE User_ID = ?";
 
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -18,12 +48,10 @@ public abstract class UserDB {
 
         try {
             ps = JDBC.connection.prepareStatement(sql);
-            ps.setString(1, username);
-            ps.setString(2, password);
+            ps.setInt(1, userId);
             rs = ps.executeQuery();
             rs.next();
 
-            int userId = rs.getInt("User_ID");
             String userName = rs.getString("User_Name");
             String userPassword = rs.getString("Password");
 

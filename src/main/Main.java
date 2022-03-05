@@ -1,6 +1,7 @@
 package main;
 
 import DB.JDBC;
+import DB.UserDB;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -55,8 +56,8 @@ public class Main extends Application {
         //test appt select
 //        AppointmentDB.select(1);
 
-        //test user select
-//        UserDB.selectCurrUser("test", "test");
+        //test user get id from login
+        UserDB.getUserIDFromLogin("test", "test");
 
 
         //test country select
