@@ -59,12 +59,13 @@ public class LoginController implements Initializable {
             int currUserId = UserDB.getUserIDFromLogin(userName, password);
 
             if( currUserId == 0) {
-
+                Alert alert = Alerts.customErrorAlert("No user with those credentials exists. Please enter valid credentials.");
+                alert.show();
+            } else {
+                navigateViews(mainMenuPath, event);
             }
 
 
-
-            navigateViews(mainMenuPath, event);
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
