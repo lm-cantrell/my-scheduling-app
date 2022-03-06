@@ -1,6 +1,8 @@
 package controller;
 
+import DB.AppointmentDB;
 import helper.Alerts;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,10 +10,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Appointment;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable {
@@ -24,6 +29,8 @@ public class MainMenuController implements Initializable {
     String addApptPath = "/view/AddAppointment.fxml";
     String updateApptPath = "/view/UpdateAppointment.fxml";
     String reportsPath = "/view/Reports.fxml";
+
+    private ObservableList<Appointment> allAppointments = AppointmentDB.select();
 
 
     @FXML
@@ -39,7 +46,40 @@ public class MainMenuController implements Initializable {
     private ToggleGroup appointmentFilter;
 
     @FXML
+    private TableColumn<?, ?> apptContactCol;
+
+    @FXML
+    private TableColumn<?, ?> apptCustCol;
+
+    @FXML
+    private TableColumn<?, ?> apptDescCol;
+
+    @FXML
+    private TableColumn<?, ?> apptEndCol;
+
+    @FXML
+    private TableColumn<?, ?> apptIdCol;
+
+    @FXML
+    private TableColumn<?, ?> apptLocCol;
+
+    @FXML
+    private TableColumn<?, ?> apptStartCol;
+
+    @FXML
+    private TableColumn<?, ?> apptTitleCol;
+
+    @FXML
+    private TableColumn<?, ?> apptTypeCol;
+
+    @FXML
+    private TableColumn<?, ?> apptUserCol;
+
+    @FXML
     private Button logoutButton;
+
+    @FXML
+    private TableView<Appointment> mainAppointmentTableview;
 
     @FXML
     private Button modifyAppointmentButton;
@@ -55,6 +95,9 @@ public class MainMenuController implements Initializable {
 
     @FXML
     private RadioButton weekApptFilterButton;
+
+    public MainMenuController() throws SQLException {
+    }
 
     @FXML
     void onActionExit(ActionEvent event) {
@@ -133,6 +176,22 @@ public class MainMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        mainAppointmentTableview.setItems(allAppointments);
+        apptIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        apptTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        apptDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        apptLocCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        apptTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        apptStartCol.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
+        apptEndCol.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
+        apptCustCol.setCellValueFactory(new PropertyValueFactory<>("assocCustId"));
+        apptUserCol.setCellValueFactory(new PropertyValueFactory<>("assocCustId"));
+        apptContactCol.setCellValueFactory(new PropertyValueFactory<>("assocContactId"));
+
+
         System.out.println("I'm initialized");
+
+
     }
 }
