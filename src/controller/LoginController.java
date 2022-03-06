@@ -8,15 +8,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -33,7 +32,16 @@ public class LoginController implements Initializable {
     private Button loginButton;
 
     @FXML
+    private Label passwordLabel;
+
+    @FXML
     private TextField passwordText;
+
+    @FXML
+    private Label titleLabel;
+
+    @FXML
+    private Label usernameLabel;
 
     @FXML
     private TextField usernameText;
@@ -59,7 +67,7 @@ public class LoginController implements Initializable {
             int currUserId = UserDB.getUserIDFromLogin(userName, password);
 
             if( currUserId == 0) {
-                Alert alert = Alerts.customErrorAlert("No user with those credentials exists. Please enter valid credentials.");
+                Alert alert = Alerts.customErrorAlert("No user with those credentials exists. Please enter valid credentials");
                 alert.show();
             } else {
                 navigateViews(mainMenuPath, event);
@@ -80,6 +88,24 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            Locale locale = Locale.getDefault();
+//            Locale locale = Locale.FRANCE;
+            resourceBundle = ResourceBundle.getBundle("assets/Nat", locale);
+            System.out.println("got the bundle");
+
+            exitButton.setText(resourceBundle.getString("cancel"));
+            loginButton.setText(resourceBundle.getString("login"));
+            passwordLabel.setText(resourceBundle.getString("password"));
+            titleLabel.setText(resourceBundle.getString("title"));
+            usernameLabel.setText(resourceBundle.getString("username"));
+
+        } catch (MissingResourceException ex){
+            ex.printStackTrace();
+        }
+
+
+
         System.out.println("I'm initialized");
     }
 }

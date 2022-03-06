@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <left>
       <AnchorPane prefHeight="407.0" prefWidth="228.0" style="-fx-background-color: #845ec2;" BorderPane.alignment="CENTER">
          <children>
@@ -18,7 +18,7 @@
                   <Image url="@../assets/icons8-notes-240.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="3.0" layoutY="231.0" prefHeight="41.0" prefWidth="219.0" text="Appointment System" textFill="#dddddd">
+            <Label fx:id="titleLabel" alignment="CENTER" layoutX="3.0" layoutY="231.0" prefHeight="41.0" prefWidth="219.0" textFill="#dddddd">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -27,31 +27,31 @@
       </AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="400.0" prefWidth="332.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="400.0" prefWidth="374.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="51.0" fitWidth="77.0" layoutX="121.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="51.0" fitWidth="77.0" layoutX="161.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/lock.png" />
                </image>
             </ImageView>
-            <Label layoutX="26.0" layoutY="152.0" prefHeight="22.0" prefWidth="79.0" text="Username:" textFill="#4d8076">
+            <Label fx:id="usernameLabel" layoutX="26.0" layoutY="152.0" prefHeight="22.0" prefWidth="126.0" textFill="#4d8076">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="27.0" layoutY="200.0" prefHeight="25.0" prefWidth="78.0" text="Password:" textFill="#4d8076">
+            <Label fx:id="passwordLabel" layoutX="27.0" layoutY="200.0" prefHeight="25.0" prefWidth="126.0" textFill="#4d8076">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameText" layoutX="106.0" layoutY="151.0" opacity="0.4" promptText="username" />
-            <TextField fx:id="passwordText" layoutX="106.0" layoutY="201.0" opacity="0.4" promptText="password" />
-            <Button fx:id="loginButton" layoutX="35.0" layoutY="257.0" mnemonicParsing="false" onAction="#onActionLogin" prefHeight="26.0" prefWidth="228.0" style="-fx-background-color: #4D8076#4D8076;" text="Login" textFill="#dddddd">
+            <TextField fx:id="usernameText" layoutX="152.0" layoutY="150.0" opacity="0.4" prefHeight="26.0" prefWidth="186.0" />
+            <TextField fx:id="passwordText" layoutX="153.0" layoutY="200.0" opacity="0.4" prefHeight="26.0" prefWidth="186.0" />
+            <Button fx:id="loginButton" layoutX="72.0" layoutY="259.0" mnemonicParsing="false" onAction="#onActionLogin" prefHeight="26.0" prefWidth="228.0" style="-fx-background-color: #4D8076#4D8076;" textFill="#dddddd">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="exitButton" layoutX="34.0" layoutY="310.0" mnemonicParsing="false" onAction="#onActionExitApplication" prefHeight="26.0" prefWidth="230.0" style="-fx-background-color: #4D8076#4D8076;" text="Cancel and Exit" textFill="#dddddd">
+            <Button fx:id="exitButton" layoutX="71.0" layoutY="312.0" mnemonicParsing="false" onAction="#onActionExitApplication" prefHeight="26.0" prefWidth="230.0" style="-fx-background-color: #4D8076#4D8076;" textFill="#dddddd">
                <font>
                   <Font size="14.0" />
                </font>
