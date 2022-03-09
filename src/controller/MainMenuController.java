@@ -24,11 +24,11 @@ public class MainMenuController implements Initializable {
     Stage stage;
     Parent scene;
 
-    String addCustPath = "/view/AddCustomer.fxml";
-    String updateCustPath = "/view/UpdateCustomer.fxml";
-    String addApptPath = "/view/AddAppointment.fxml";
-    String updateApptPath = "/view/UpdateAppointment.fxml";
-    String reportsPath = "/view/Reports.fxml";
+    private String addCustPath = "/view/AddCustomer.fxml";
+    private String updateCustPath = "/view/UpdateCustomer.fxml";
+    private String addApptPath = "/view/AddAppointment.fxml";
+    private String updateApptPath = "/view/UpdateAppointment.fxml";
+    private String reportsPath = "/view/Reports.fxml";
 
     private ObservableList<Appointment> allAppointments = AppointmentDB.select();
 

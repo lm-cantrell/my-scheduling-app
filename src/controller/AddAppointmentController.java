@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class AddAppointmentController implements Initializable {
@@ -22,6 +25,10 @@ public class AddAppointmentController implements Initializable {
     Parent scene;
 
     String mainMenuPath = "/view/MainMenu.fxml";
+    ObservableList<LocalTime> scheduleTimesEastern = FXCollections.observableArrayList();
+
+
+
 
     @FXML
     private Button addApptAddButton;
@@ -51,7 +58,7 @@ public class AddAppointmentController implements Initializable {
     private DatePicker addApptStartDatePick;
 
     @FXML
-    private ComboBox<?> addApptStartTimeCombo;
+    private ComboBox<LocalTime> addApptStartTimeCombo;
 
     @FXML
     private TextField addApptTitletxt;
@@ -96,8 +103,26 @@ public class AddAppointmentController implements Initializable {
         stage.show();
     }
 
+    public void generateTimesList() {
+        for ( int i = 8; i < 23; i++) {
+            LocalTime thisTime = LocalTime.of(i, 0);
+            scheduleTimesEastern.add(thisTime);
+        }
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        generateTimesList();
+
+        //convert from eastern to Local system time to display
+
+        //currently not in local time
+        addApptStartTimeCombo.setItems(scheduleTimesEastern);
+        addApptStartTimeCombo.setVisibleRowCount(5);
+        addApptStartTimeCombo.setPromptText("Start time...");
+
         System.out.println("I'm initialized");
     }
 }

@@ -1,7 +1,6 @@
 package main;
 
 import DB.JDBC;
-import DB.UserDB;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -36,7 +35,7 @@ public class Main extends Application {
 //        CustomerDB.delete(5);
 
 //        test cust select
-//        CustomerDB.select(1);
+//        CustomerDB.select();
 
 
         LocalDateTime ldtTest = LocalDateTime.now();
@@ -57,14 +56,14 @@ public class Main extends Application {
 //        AppointmentDB.select(1);
 
         //test user get id from login
-        UserDB.getUserIDFromLogin("test", "test");
+//        UserDB.getUserIDFromLogin("test", "test");
 
 
         //test country select
 //        CountryDB.select();
 
         //test division select;
-//        DivisionDB.select();
+//        DivisionDB.select("Arkansas");
 
         launch(args);
 

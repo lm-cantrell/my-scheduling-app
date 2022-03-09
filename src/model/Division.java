@@ -35,4 +35,9 @@ public class Division {
     public void setAssocCountryId(int assocCountryId) {
         this.assocCountryId = assocCountryId;
     }
+
+    @Override
+    public String toString() {
+        return divisionName;
+    }
 }

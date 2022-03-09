@@ -102,9 +102,31 @@ public abstract class CustomerDB {
                 String phone = rs.getString("Phone");
                 int divId = rs.getInt("Division_ID");
 
-                Customer currCustomer = new Customer(custId, custName, address, postCode, phone, divId);
+
+                String divsql = "SELECT * FROM FIRST_LEVEL_DIVISIONS WHERE Division_ID = ?";
+
+                PreparedStatement psd = JDBC.connection.prepareStatement(divsql);
+                psd.setInt(1, divId);
+                ResultSet rsd = psd.executeQuery();
+
+                rsd.next();
+
+                String division = rsd.getString("Division");
+                int countryId = rsd.getInt("Country_ID");
+
+
+                String countrysql = "SELECT * FROM COUNTRIES WHERE Country_ID = ?";
+                PreparedStatement psc = JDBC.connection.prepareStatement(countrysql);
+                psc.setInt(1, countryId);
+                ResultSet rsc = psc.executeQuery();
+
+                rsc.next();
+
+                String country = rsc.getString("Country");
+
+                Customer currCustomer = new Customer(custId, custName, address, postCode, phone, country, division);
                 allCustList.add(currCustomer);
-                System.out.println(custId + " | " + custName + " | " + address + " | " + postCode + " | " + phone + " | " + divId);
+                System.out.println(custId + " | " + custName + " | " + address + " | " + postCode + " | " + phone + " | " + country + " | " + division);
             }
 
             return allCustList;
@@ -120,7 +142,7 @@ public abstract class CustomerDB {
 
     }
 
-    public static ObservableList select(int id) throws SQLException{
+    public static Customer select(int id) throws SQLException{
         String sql = "SELECT * FROM CUSTOMERS WHERE Customer_ID = ?";
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -129,22 +151,41 @@ public abstract class CustomerDB {
             ps = JDBC.connection.prepareStatement(sql);
             ps.setInt(1, id);
             rs = ps.executeQuery();
+            rs.next();
 
-            ObservableList<Customer> allCustList = FXCollections.observableArrayList();
+            int custId = rs.getInt("Customer_ID");
+            String custName = rs.getString("Customer_Name");
+            String address = rs.getString("Address");
+            String postCode = rs.getString("Postal_Code");
+            String phone = rs.getString("Phone");
+            int divId = rs.getInt("Division_ID");
 
-            while (rs.next()){
-                int custId = rs.getInt("Customer_ID");
-                String custName = rs.getString("Customer_Name");
-                String address = rs.getString("Address");
-                String postCode = rs.getString("Postal_Code");
-                String phone = rs.getString("Phone");
-                int divId = rs.getInt("Division_ID");
+            String divsql = "SELECT * FROM FIRST_LEVEL_DIVISIONS WHERE Division_ID = ?";
 
-                Customer currCustomer = new Customer(custId, custName, address, postCode, phone, divId);
-                allCustList.add(currCustomer);
-                System.out.println(custId + " | " + custName + " | " + address + " | " + postCode + " | " + phone + " | " + divId);
-            }
-            return allCustList;
+            PreparedStatement psd = JDBC.connection.prepareStatement(divsql);
+            psd.setInt(1, divId);
+            ResultSet rsd = psd.executeQuery();
+
+            rsd.next();
+
+            String division = rsd.getString("Division");
+            int countryId = rsd.getInt("Country_ID");
+
+            String countrysql = "SELECT * FROM COUNTRIES WHERE Country_ID = ?";
+            PreparedStatement psc = JDBC.connection.prepareStatement(countrysql);
+            psc.setInt(1, countryId);
+            ResultSet rsc = psc.executeQuery();
+
+            rsc.next();
+
+            String country = rsc.getString("Country");
+
+
+
+            Customer currCustomer = new Customer(custId, custName, address, postCode, phone, country, division);
+            System.out.println(custId + " | " + custName + " | " + address + " | " + postCode + " | " + phone + " | " + country + " | " + division);
+
+            return currCustomer;
         } finally {
             if(ps != null) {
                 ps.close();
