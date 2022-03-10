@@ -17,4 +17,11 @@ public class Alerts {
         alert.setContentText(message);
         return alert;
     }
+
+    public static Alert customConfirmationAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm your action");
+        alert.setContentText(message);
+        return alert;
+    }
 }
