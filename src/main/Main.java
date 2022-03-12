@@ -1,14 +1,18 @@
 package main;
 
 import DB.JDBC;
+import controller.AddAppointmentController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Appointment;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Main extends Application {
 
@@ -38,32 +42,24 @@ public class Main extends Application {
 //        CustomerDB.select();
 
 
-        LocalDateTime ldtTest = LocalDateTime.now();
-        LocalDateTime ldtTest2 = LocalDateTime.now();
+//        LocalDateTime ldtTest = LocalDateTime.now();
+//        LocalDateTime ldtTest2 = LocalDateTime.now();
 
-        //test appt insert
+        LocalDate ldTest = LocalDate.of(2020, 5, 28);
+        LocalTime ltTest = LocalTime.of(22, 30);
+        LocalTime ltTest2 = LocalTime.of(23, 30);
 
-//        AppointmentDB.insert("test title", "test description", "test location", "test type",
-//                ldtTest, ldtTest2, 1, 1, 1);
-        //test appt update
-//        AppointmentDB.update(4, "update test", "updated description", "updated location", "updated type",
-//                ldtTest, ldtTest2, 1, 1, 1);
+        LocalDateTime ldtTest = LocalDateTime.of(ldTest, ltTest);
+        LocalDateTime ldtTest2 = LocalDateTime.of(ldTest, ltTest2);
 
-        //test appt del
-//        AppointmentDB.delete(4);
+        Appointment testAppointment= new Appointment(5, "title", "desc", "loc", "type", ldtTest, ldtTest2, 1, 1, 1);
+        boolean hasAnOverlap = AddAppointmentController.hasOverlap(testAppointment);
 
-        //test appt select
-//        AppointmentDB.select(1);
-
-        //test user get id from login
-//        UserDB.getUserIDFromLogin("test", "test");
-
-
-        //test country select
-//        CountryDB.select();
-
-        //test division select;
-//        DivisionDB.select("Arkansas");
+        if(hasAnOverlap){
+            System.out.println("The appointment overlaps");
+        } else {
+            System.out.println("No overlap found");
+        }
 
 
         launch(args);

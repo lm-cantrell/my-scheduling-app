@@ -1,5 +1,6 @@
 package controller;
 
+import DB.AppointmentDB;
 import helper.Time;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,10 +15,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Appointment;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.*;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AddAppointmentController implements Initializable {
@@ -119,6 +123,35 @@ public class AddAppointmentController implements Initializable {
             scheduleTimes.add(localZdt.toLocalTime());
         }
 
+    }
+
+    public static boolean hasOverlap(Appointment appt) throws SQLException {
+        int currCustId = appt.getAssocCustId();
+        ObservableList<Appointment> custAppts = AppointmentDB.selectByCust(currCustId);
+        ArrayList<Appointment> overlap = new ArrayList<Appointment>();
+        custAppts.forEach(appointment -> {
+            //check current appointment for overlap with appointment argument
+
+            LocalDateTime aStart = appt.getStartDateTime();
+            LocalDateTime bStart = appointment.getStartDateTime();
+            LocalDateTime aEnd = appt.getEndDateTime();
+            LocalDateTime bEnd = appointment.getEndDateTime();
+            if((aStart.isAfter(bStart) || aStart.isEqual(bStart)) && (aStart.isBefore(bEnd))){
+                overlap.add(appointment);
+            }
+            if((aEnd.isAfter(bStart)) && (aEnd.isBefore(bEnd) || aEnd.isEqual(bEnd))){
+                overlap.add(appointment);
+            }
+            if((aStart.isBefore(bStart) || aStart.isEqual(bStart)) && (aEnd.isAfter(bEnd) || aEnd.isEqual(bEnd))){
+                overlap.add(appointment);
+            }
+        });
+
+        if(overlap.size() > 0){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
