@@ -1,5 +1,6 @@
 package controller;
 
+import helper.Time;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.ResourceBundle;
 
 public class AddAppointmentController implements Initializable {
@@ -25,7 +26,7 @@ public class AddAppointmentController implements Initializable {
     Parent scene;
 
     String mainMenuPath = "/view/MainMenu.fxml";
-    ObservableList<LocalTime> scheduleTimesEastern = FXCollections.observableArrayList();
+    ObservableList<LocalTime> scheduleTimes = FXCollections.observableArrayList();
 
 
 
@@ -69,8 +70,6 @@ public class AddAppointmentController implements Initializable {
     @FXML
     private TextField addApptUserIdTxt;
 
-    @FXML
-    private DatePicker addAptEndDatePick;
 
     @FXML
     void onActionAddAppt(ActionEvent event) {
@@ -105,21 +104,37 @@ public class AddAppointmentController implements Initializable {
 
     public void generateTimesList() {
         for ( int i = 8; i < 23; i++) {
+            LocalDate selectedDate = addApptStartDatePick.getValue();
             LocalTime thisTime = LocalTime.of(i, 0);
-            scheduleTimesEastern.add(thisTime);
+            LocalDateTime easternLdt = LocalDateTime.of(selectedDate, thisTime);
+            System.out.println(easternLdt);
+
+
+            ZoneId localZone = ZoneId.systemDefault();
+            ZonedDateTime easternZdt = ZonedDateTime.of(easternLdt, ZoneId.of("America/New_York"));
+            ZonedDateTime localZdt = Time.easternToLocalSys(easternZdt);
+
+
+
+            scheduleTimes.add(localZdt.toLocalTime());
         }
 
     }
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        generateTimesList();
 
+
+        addApptStartDatePick.setValue(LocalDate.now());
+
+
+        generateTimesList();
         //convert from eastern to Local system time to display
 
         //currently not in local time
-        addApptStartTimeCombo.setItems(scheduleTimesEastern);
+        addApptStartTimeCombo.setItems(scheduleTimes);
         addApptStartTimeCombo.setVisibleRowCount(5);
         addApptStartTimeCombo.setPromptText("Start time...");
 
