@@ -1,6 +1,7 @@
 package controller;
 
 import DB.AppointmentDB;
+import DB.ContactDB;
 import helper.Time;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,8 +33,7 @@ public class AddAppointmentController implements Initializable {
 
     String mainMenuPath = "/view/MainMenu.fxml";
     ObservableList<LocalTime> scheduleTimes = FXCollections.observableArrayList();
-
-
+    ObservableList<Contact> allContactList = ContactDB.select();
 
 
     @FXML
@@ -74,6 +74,9 @@ public class AddAppointmentController implements Initializable {
 
     @FXML
     private TextField addApptUserIdTxt;
+
+    public AddAppointmentController() throws SQLException {
+    }
 
 
     @FXML
@@ -175,6 +178,8 @@ public class AddAppointmentController implements Initializable {
         addApptStartTimeCombo.setItems(scheduleTimes);
         addApptStartTimeCombo.setVisibleRowCount(5);
         addApptStartTimeCombo.setPromptText("Start time...");
+
+        addApptContactCombo.setItems(allContactList);
 
         System.out.println("I'm initialized");
     }
