@@ -177,4 +177,47 @@ public abstract class AppointmentDB {
             }
         }
     }
+
+    public static ObservableList selectByCust(int custId) throws SQLException {
+        String sql = "SELECT * FROM APPOINTMENTS WHERE Customer_ID = ?";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ObservableList<Appointment> allApptList = FXCollections.observableArrayList();
+
+        try {
+            ps = JDBC.connection.prepareStatement(sql);
+            ps.setInt(1, custId);
+            rs = ps.executeQuery();
+
+            while (rs.next()){
+                int apptId = rs.getInt("Appointment_ID");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String location = rs.getString("Location");
+                String type = rs.getString("Type");
+                Timestamp startTS = rs.getTimestamp("Start");
+                LocalDateTime start = startTS.toLocalDateTime();
+                Timestamp endTS = rs.getTimestamp("End");
+                LocalDateTime end = endTS.toLocalDateTime();
+                int currCustId = rs.getInt("Customer_ID");
+                int userId = rs.getInt("User_ID");
+                int contactId = rs.getInt("Contact_ID");
+
+                Appointment currAppointment = new Appointment(apptId, title, description, location, type, start, end, currCustId, userId, contactId);
+                allApptList.add(currAppointment);
+                System.out.println(apptId + " | " + title + " | " + description + " | " + location + " | " + type + " | " + start + " | " + end + " | " + currCustId + " | " + userId + " | " + contactId);
+            }
+
+            return allApptList;
+
+        } finally {
+            if(ps != null) {
+                ps.close();
+            }
+            if(rs != null){
+                rs.close();
+            }
+        }
+    }
 }

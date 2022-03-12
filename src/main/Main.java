@@ -66,8 +66,6 @@ public class Main extends Application {
 //        DivisionDB.select("Arkansas");
 
 
-
-
         launch(args);
 
         JDBC.closeConnection();
