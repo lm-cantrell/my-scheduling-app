@@ -8,6 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/AddAppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AddAppointmentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/AddAppointment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AddAppointment.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +75,7 @@
       <updated>1645039175540</updated>
       <workItem from="1645039179662" duration="12988000" />
       <workItem from="1645320140481" duration="26895000" />
-      <workItem from="1646353113483" duration="76893000" />
+      <workItem from="1646353113483" duration="78090000" />
     </task>
     <servers />
   </component>

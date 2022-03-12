@@ -80,8 +80,8 @@
                 <TextField fx:id="addApptTitletxt" layoutX="106.0" layoutY="61.0" opacity="0.4" />
                 <TextField fx:id="addApptDescTxt" layoutX="106.0" layoutY="105.0" opacity="0.4" />
                 <TextField fx:id="addApptLocationTxt" layoutX="106.0" layoutY="150.0" opacity="0.4" />
-                <TextField fx:id="addApptContactTxt" layoutX="106.0" layoutY="192.0" opacity="0.4" />
             <TextField fx:id="addApptTypeTxt" layoutX="106.0" layoutY="234.0" opacity="0.4" />
+            <ComboBox fx:id="addApptContactCombo" layoutX="104.0" layoutY="193.0" prefHeight="26.0" prefWidth="161.0" />
             </children>
         </AnchorPane>
     </bottom>

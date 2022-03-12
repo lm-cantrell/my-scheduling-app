@@ -16,6 +16,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Appointment;
+import model.Contact;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,7 +43,7 @@ public class AddAppointmentController implements Initializable {
     private Button addApptCancelButton;
 
     @FXML
-    private TextField addApptContactTxt;
+    private ComboBox<Contact> addApptContactCombo;
 
     @FXML
     private TextField addApptCustIdTxt;
@@ -89,10 +90,6 @@ public class AddAppointmentController implements Initializable {
         }
     }
 
-    @FXML
-    void onActionFilterEnd(ActionEvent event) {
-
-    }
 
     @FXML
     void onActionFilterStart(ActionEvent event) {
@@ -124,6 +121,14 @@ public class AddAppointmentController implements Initializable {
         }
 
     }
+
+//    public boolean allFieldsSelected(){
+//        if (addApptTitletxt.getText().isEmpty() ||
+//            addApptDescTxt.getText().isEmpty() ||
+//                addApptLocationTxt.getText().isEmpty() ||
+//
+//        ){}
+//    }
 
     public static boolean hasOverlap(Appointment appt) throws SQLException {
         int currCustId = appt.getAssocCustId();
