@@ -18,6 +18,13 @@ public abstract class Time {
         return sysLocalZdtObject;
     }
 
+    public static ZonedDateTime localToUtc(ZonedDateTime localZdtObject){
+        ZoneId utcZone = ZoneId.of("UTC");
+        ZonedDateTime utcZdtObject = ZonedDateTime.ofInstant(localZdtObject.toInstant(), utcZone);
+
+        return utcZdtObject;
+    }
+
     public static ZonedDateTime utcToEastern (ZonedDateTime utcZdtObject) {
         ZoneId newYorkZone = ZoneId.of("America/New_York");
         ZonedDateTime easternZdtObject = ZonedDateTime.ofInstant(utcZdtObject.toInstant(), newYorkZone);

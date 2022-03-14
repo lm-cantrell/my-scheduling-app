@@ -52,7 +52,7 @@ public class AddAppointmentController implements Initializable {
     private TextField addApptDescTxt;
 
     @FXML
-    private ComboBox<?> addApptEndTimeCombo;
+    private ComboBox<LocalTime> addApptEndTimeCombo;
 
     @FXML
     private TextField addApptIdTxt;
@@ -80,7 +80,56 @@ public class AddAppointmentController implements Initializable {
 
 
     @FXML
-    void onActionAddAppt(ActionEvent event) {
+    void onActionAddAppt(ActionEvent event) throws SQLException {
+
+
+        if(allFieldsSelected()){
+            String title = addApptTitletxt.getText();
+            String desc = addApptDescTxt.getText();
+            String location = addApptLocationTxt.getText();
+            String type = addApptTypeTxt.getText();
+            LocalDate localDate = addApptStartDatePick.getValue();
+            LocalTime startLt = addApptStartTimeCombo.getValue();
+            LocalTime endLt = addApptEndTimeCombo.getValue();
+            LocalDateTime start = LocalDateTime.of(localDate, startLt);
+            LocalDateTime end = LocalDateTime.of(localDate, endLt);
+            int custId = Integer.valueOf(addApptCustIdTxt.getText());
+            int userId = Integer.valueOf(addApptUserIdTxt.getText());
+            Contact selectedContact = addApptContactCombo.getValue();
+            int contactId = selectedContact.getContactId();
+
+//            ZonedDateTime startLocal = ZonedDateTime.of(start, ZoneId.systemDefault());
+//            ZonedDateTime endLocal = ZonedDateTime.of(end, ZoneId.systemDefault());
+//            System.out.println("start in local: " + startLocal);
+//            System.out.println("end in local: " + endLocal);
+//
+//
+//            ZonedDateTime startUtcZdt = Time.localToUtc(startLocal);
+//            ZonedDateTime endUtcZdt = Time.localToUtc(endLocal);
+//            System.out.println("start in utc: " + startUtcZdt);
+//            System.out.println("end in utc: " + endUtcZdt);
+//
+//            LocalDateTime startUtcLdt = startUtcZdt.toLocalDateTime();
+//            LocalDateTime endUtcLdt = endUtcZdt.toLocalDateTime();
+
+            if(!hasOverlap(start, end, custId)){
+                System.out.println("no overlap detected");
+                addApptToDB(title, desc, location, type, start, end, custId, userId, contactId);
+                try {
+                    navigateViews(mainMenuPath, event);
+                }catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+                System.out.println("your appointment overlaps");
+            }
+
+
+
+        } else {
+            System.out.println("You missed a field or something");
+        }
+
 
     }
 
@@ -111,8 +160,6 @@ public class AddAppointmentController implements Initializable {
             LocalDate selectedDate = addApptStartDatePick.getValue();
             LocalTime thisTime = LocalTime.of(i, 0);
             LocalDateTime easternLdt = LocalDateTime.of(selectedDate, thisTime);
-            System.out.println(easternLdt);
-
 
             ZoneId localZone = ZoneId.systemDefault();
             ZonedDateTime easternZdt = ZonedDateTime.of(easternLdt, ZoneId.of("America/New_York"));
@@ -125,24 +172,47 @@ public class AddAppointmentController implements Initializable {
 
     }
 
-//    public boolean allFieldsSelected(){
-//        if (addApptTitletxt.getText().isEmpty() ||
-//            addApptDescTxt.getText().isEmpty() ||
-//                addApptLocationTxt.getText().isEmpty() ||
-//
-//        ){}
-//    }
+    public boolean allFieldsSelected(){
+        if (addApptTitletxt.getText().isEmpty() ||
+            addApptDescTxt.getText().isEmpty() ||
+                addApptLocationTxt.getText().isEmpty() ||
+                addApptContactCombo.getValue() == null ||
+                addApptTypeTxt.getText().isEmpty() ||
+                addApptCustIdTxt.getText().isEmpty() ||
+                addApptUserIdTxt.getText().isEmpty() ||
+                addApptStartDatePick.getValue() == null ||
+                addApptStartTimeCombo.getValue() == null ||
+                addApptEndTimeCombo.getValue() == null){
+            System.out.println("missed a field");
+            return false;
+        } else {
+            System.out.println("all fields have info");
+            return true;
+        }
 
-    public static boolean hasOverlap(Appointment appt) throws SQLException {
-        int currCustId = appt.getAssocCustId();
+    }
+
+    public void addApptToDB(String title, String desc, String location, String type,
+                            LocalDateTime start, LocalDateTime end, int custId,
+                            int userId, int contactId) throws SQLException {
+        try {
+            AppointmentDB.insert(title, desc, location, type, start, end, custId, userId, contactId);
+            System.out.println("appointment added to the db");
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static boolean hasOverlap(LocalDateTime aStart, LocalDateTime aEnd, int currCustId) throws SQLException {
+
         ObservableList<Appointment> custAppts = AppointmentDB.selectByCust(currCustId);
         ArrayList<Appointment> overlap = new ArrayList<Appointment>();
         custAppts.forEach(appointment -> {
             //check current appointment for overlap with appointment argument
 
-            LocalDateTime aStart = appt.getStartDateTime();
+
             LocalDateTime bStart = appointment.getStartDateTime();
-            LocalDateTime aEnd = appt.getEndDateTime();
+
             LocalDateTime bEnd = appointment.getEndDateTime();
             if((aStart.isAfter(bStart) || aStart.isEqual(bStart)) && (aStart.isBefore(bEnd))){
                 overlap.add(appointment);
@@ -178,6 +248,10 @@ public class AddAppointmentController implements Initializable {
         addApptStartTimeCombo.setItems(scheduleTimes);
         addApptStartTimeCombo.setVisibleRowCount(5);
         addApptStartTimeCombo.setPromptText("Start time...");
+
+        addApptEndTimeCombo.setItems(scheduleTimes);
+        addApptEndTimeCombo.setVisibleRowCount(5);
+        addApptEndTimeCombo.setPromptText("End time...");
 
         addApptContactCombo.setItems(allContactList);
 

@@ -1,6 +1,5 @@
 package main;
 
-import DB.ContactDB;
 import DB.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -58,7 +57,7 @@ public class Main extends Application {
 //        }
 
         // test contact select
-        ContactDB.select();
+//        ContactDB.select();
 
 
         launch(args);
