@@ -18,11 +18,17 @@
                   <Image url="@../assets/icons8-notes-240.png" />
                </image>
             </ImageView>
-            <Label fx:id="titleLabel" alignment="CENTER" layoutX="3.0" layoutY="231.0" prefHeight="41.0" prefWidth="219.0" textFill="#dddddd">
+            <Label fx:id="titleLabel" alignment="CENTER" layoutX="3.0" layoutY="231.0" prefHeight="41.0" prefWidth="219.0" textAlignment="CENTER" textFill="#dddddd">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
+            <Label fx:id="regionLabel" alignment="CENTER" layoutX="2.0" layoutY="261.0" prefHeight="37.0" prefWidth="228.0" textAlignment="CENTER" textFill="#dddddd" wrapText="true">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="regionDetailsLabel" alignment="CENTER" layoutX="41.0" layoutY="298.0" prefHeight="25.0" prefWidth="151.0" textAlignment="CENTER" textFill="#dddddd" wrapText="true" />
          </children>
       </AnchorPane>
    </left>

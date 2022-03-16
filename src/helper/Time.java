@@ -1,7 +1,11 @@
 package helper;
 
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 
 public abstract class Time {
 
@@ -38,4 +42,37 @@ public abstract class Time {
 
         return sysLocalZdtObject;
     }
+
+    public static LocalDateTime[] getWeek(LocalDateTime today){
+        LocalDateTime[] startStop;
+        startStop = new LocalDateTime[2];
+        System.out.println(today.getDayOfWeek());
+        int currYear = today.getYear();
+        int currMonth = today.getMonthValue();
+        DayOfWeek currDay = today.getDayOfWeek();
+
+        HashMap<DayOfWeek, Integer> weekCalcMap = new HashMap<DayOfWeek, Integer>();
+        weekCalcMap.put(DayOfWeek.MONDAY, 0);
+        weekCalcMap.put(DayOfWeek.TUESDAY, 1);
+        weekCalcMap.put(DayOfWeek.WEDNESDAY, 2);
+        weekCalcMap.put(DayOfWeek.THURSDAY, 3);
+        weekCalcMap.put(DayOfWeek.FRIDAY, 4);
+        weekCalcMap.put(DayOfWeek.SATURDAY, 5);
+        weekCalcMap.put(DayOfWeek.SUNDAY, 6);
+        System.out.println(currYear + "|" + currMonth + "|" + currDay);
+
+        int adjustmentAmount = weekCalcMap.get(currDay);
+
+        LocalDateTime startWindow = today.minus(adjustmentAmount, ChronoUnit.DAYS);
+        LocalDateTime endWindow = startWindow.plus(6, ChronoUnit.DAYS);
+
+        startStop[0] = startWindow;
+        startStop[1] = endWindow;
+        System.out.println("now: " + today);
+        System.out.println("start: " + startWindow);
+        System.out.println("end: " + endWindow);
+
+        return startStop;
+    }
+
 }

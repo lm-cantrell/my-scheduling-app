@@ -38,6 +38,12 @@ public class LoginController implements Initializable {
     private TextField passwordText;
 
     @FXML
+    private Label regionLabel;
+
+    @FXML
+    private Label regionDetailsLabel;
+
+    @FXML
     private Label titleLabel;
 
     @FXML
@@ -67,7 +73,15 @@ public class LoginController implements Initializable {
             int currUserId = UserDB.getUserIDFromLogin(userName, password);
 
             if( currUserId == 0) {
-                Alert alert = Alerts.customErrorAlert("No user with those credentials exists. Please enter valid credentials");
+//                Locale locale = Locale.getDefault();
+                Locale locale = Locale.FRANCE;
+                String alertString;
+                if(locale == Locale.FRANCE){
+                    alertString = "Aucun utilisateur avec ces informations d'identification n'existe. Veuillez entrer des informations d'identification valides";
+                } else {
+                    alertString = "No user with those credentials exists. Please enter valid credentials";
+                }
+                Alert alert = Alerts.customErrorAlert(alertString);
                 alert.show();
             } else {
                 navigateViews(mainMenuPath, event);
@@ -89,16 +103,20 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            Locale locale = Locale.getDefault();
-//            Locale locale = Locale.FRANCE;
+//            Locale locale = Locale.getDefault();
+            Locale locale = Locale.FRANCE;
             resourceBundle = ResourceBundle.getBundle("assets/Nat", locale);
             System.out.println("got the bundle");
 
+            regionLabel.setText(resourceBundle.getString("region"));
+            regionDetailsLabel.setText(String.valueOf(locale));
             exitButton.setText(resourceBundle.getString("cancel"));
             loginButton.setText(resourceBundle.getString("login"));
             passwordLabel.setText(resourceBundle.getString("password"));
             titleLabel.setText(resourceBundle.getString("title"));
             usernameLabel.setText(resourceBundle.getString("username"));
+
+            String alertText = resourceBundle.getString("wrong");
 
         } catch (MissingResourceException ex){
             ex.printStackTrace();

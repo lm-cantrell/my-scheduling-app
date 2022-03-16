@@ -1,5 +1,6 @@
 package controller;
 
+import DB.AppointmentDB;
 import DB.CountryDB;
 import DB.CustomerDB;
 import DB.DivisionDB;
@@ -16,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import model.Appointment;
 import model.Country;
 import model.Customer;
 import model.Division;
@@ -96,12 +98,16 @@ public class UpdateCustomerController implements Initializable {
 
     @FXML
     void onActionCancel(ActionEvent event) {
-
-        try {
-            navigateViews(mainMenuPath, event);
-        } catch (IOException e) {
-            e.printStackTrace();
+        Alert alert = Alerts.customConfirmationAlert("Do you want to discard any changes?");
+        if(alert.showAndWait().get() == ButtonType.OK){
+            try {
+                navigateViews(mainMenuPath, event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
+
 
     }
 
@@ -152,8 +158,32 @@ public class UpdateCustomerController implements Initializable {
     }
 
     @FXML
-    void onActionDeleteCust(ActionEvent event) {
+    void onActionDeleteCust(ActionEvent event) throws SQLException {
+        if(updateCustTableview.getSelectionModel().getSelectedItem() != null){
+            Alert alert = Alerts.customConfirmationAlert("Are you sure you want to delete the customer and all associated appointments?");
+            if(alert.showAndWait().get() == ButtonType.OK){
+                boolean hasAppointments = true;
+                int custId = Integer.valueOf(updateCustIdTxt.getText());
+                ObservableList<Appointment> custAppts = AppointmentDB.selectByCust(custId);
+                custAppts.forEach( appointment -> {
+                    try {
+                        AppointmentDB.delete(appointment.getAppointmentId());
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                });
+                CustomerDB.delete(custId);
+                try{
+                    navigateViews(mainMenuPath, event);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 
+            System.out.println("HAS SELECTION, CLICKED DELETE, no appts");
+        }else {
+            System.out.println("NO TABLEVIEW SELECTION, CLICKED DELETE");
+        }
     }
 
     @FXML

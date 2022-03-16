@@ -2,6 +2,8 @@ package controller;
 
 import DB.AppointmentDB;
 import helper.Alerts;
+import helper.Time;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +19,12 @@ import model.Appointment;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class MainMenuController implements Initializable {
 
@@ -154,16 +161,80 @@ public class MainMenuController implements Initializable {
 
     @FXML
     void onActionShowAll(ActionEvent event) {
-
+        mainAppointmentTableview.setItems(allAppointments);
+        apptIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        apptTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        apptDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        apptLocCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        apptTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        apptStartCol.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
+        apptEndCol.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
+        apptCustCol.setCellValueFactory(new PropertyValueFactory<>("assocCustId"));
+        apptUserCol.setCellValueFactory(new PropertyValueFactory<>("assocCustId"));
+        apptContactCol.setCellValueFactory(new PropertyValueFactory<>("assocContactId"));
     }
 
     @FXML
     void onActionShowByMonth(ActionEvent event) {
-
+        LocalDateTime current = LocalDateTime.now();
+        getMonth(current);
     }
 
     @FXML
     void onActionShowByWeek(ActionEvent event) {
+        LocalDateTime current = LocalDateTime.now().with(LocalTime.of(0, 0));
+        LocalDateTime[] weekStartEnd;
+        weekStartEnd = Time.getWeek(current);
+
+        ArrayList weekAppointments;
+        weekAppointments = (ArrayList) allAppointments
+                .stream()
+                .filter(appointment -> (appointment.getStartDateTime().isBefore(weekStartEnd[1]) || appointment.getStartDateTime().isEqual(weekStartEnd[1])) &&
+                        (appointment.getStartDateTime().isAfter(weekStartEnd[0]) || appointment.getStartDateTime().isEqual(weekStartEnd[0])))
+                .collect(Collectors.toList());
+
+        ObservableList weekApptOL = FXCollections.observableList(weekAppointments);
+        mainAppointmentTableview.setItems(weekApptOL);
+        apptIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        apptTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        apptDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        apptLocCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        apptTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        apptStartCol.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
+        apptEndCol.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
+        apptCustCol.setCellValueFactory(new PropertyValueFactory<>("assocCustId"));
+        apptUserCol.setCellValueFactory(new PropertyValueFactory<>("assocCustId"));
+        apptContactCol.setCellValueFactory(new PropertyValueFactory<>("assocContactId"));
+
+    }
+
+
+
+    public void getMonth(LocalDateTime today){
+        LocalDateTime current = LocalDateTime.now();
+        Month currMonth = current.getMonth();
+
+        ArrayList monthAppointments;
+        monthAppointments = (ArrayList) allAppointments
+                .stream()
+                        .filter(appointment -> (appointment.getStartDateTime().getMonth() == currMonth))
+                                .collect(Collectors.toList());
+
+        ObservableList monthApptOL = FXCollections.observableList(monthAppointments);
+
+        mainAppointmentTableview.setItems(monthApptOL);
+        apptIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        apptTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        apptDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        apptLocCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        apptTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        apptStartCol.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
+        apptEndCol.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
+        apptCustCol.setCellValueFactory(new PropertyValueFactory<>("assocCustId"));
+        apptUserCol.setCellValueFactory(new PropertyValueFactory<>("assocCustId"));
+        apptContactCol.setCellValueFactory(new PropertyValueFactory<>("assocContactId"));
+
+
 
     }
 
