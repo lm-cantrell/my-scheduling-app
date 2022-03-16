@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dde9f8b-37ff-4191-9fbb-6a987152dca0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DB/JDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DB/JDBC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/Nat_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/Nat_en.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/Nat_fr.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/Nat_fr.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/UpdateCustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/UpdateCustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper/Time.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/Time.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Login.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="9dde9f8b-37ff-4191-9fbb-6a987152dca0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,7 +70,7 @@
       <updated>1645039175540</updated>
       <workItem from="1645039179662" duration="12988000" />
       <workItem from="1645320140481" duration="26895000" />
-      <workItem from="1646353113483" duration="107563000" />
+      <workItem from="1646353113483" duration="107879000" />
     </task>
     <servers />
   </component>
