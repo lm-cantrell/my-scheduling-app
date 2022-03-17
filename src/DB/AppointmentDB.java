@@ -92,7 +92,7 @@ public abstract class AppointmentDB {
 
     //select and overloaded select
     public static ObservableList select() throws SQLException{
-        System.out.println("appointment select all called");
+//        System.out.println("appointment select all called");
         String sql = "SELECT * FROM APPOINTMENTS";
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -119,7 +119,7 @@ public abstract class AppointmentDB {
 
                 Appointment currAppointment = new Appointment(apptId, title, description, location, type, start, end, custId, userId, contactId);
                 allApptList.add(currAppointment);
-                System.out.println(apptId + " | " + title + " | " + description + " | " + location + " | " + type + " | " + start + " | " + end + " | " + custId + " | " + userId + " | " + contactId);
+//                System.out.println(apptId + " | " + title + " | " + description + " | " + location + " | " + type + " | " + start + " | " + end + " | " + custId + " | " + userId + " | " + contactId);
             }
 
             return allApptList;

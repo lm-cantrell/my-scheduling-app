@@ -2,6 +2,7 @@ package controller;
 
 import DB.AppointmentDB;
 import DB.ContactDB;
+import helper.Alerts;
 import helper.Time;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,10 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Appointment;
 import model.Contact;
@@ -112,22 +110,32 @@ public class AddAppointmentController implements Initializable {
 //            LocalDateTime startUtcLdt = startUtcZdt.toLocalDateTime();
 //            LocalDateTime endUtcLdt = endUtcZdt.toLocalDateTime();
 
-            if(!hasOverlap(start, end, custId)){
-                System.out.println("no overlap detected");
-                addApptToDB(title, desc, location, type, start, end, custId, userId, contactId);
-                try {
-                    navigateViews(mainMenuPath, event);
-                }catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+            if(end.isBefore(start) || end.isEqual(start)){
+                Alert badTimeAlert = Alerts.customErrorAlert("Start time must be before the end of the appointment");
+                badTimeAlert.showAndWait();
             } else {
-                System.out.println("your appointment overlaps");
+                if(!hasOverlap(start, end, custId)){
+
+                    if(localDate.getDayOfWeek() == DayOfWeek.SATURDAY || localDate.getDayOfWeek() == DayOfWeek.SUNDAY){
+                        Alert notBusHours = Alerts.customErrorAlert("Business hours don't include weekends. Please chose another date.");
+                        notBusHours.showAndWait();
+                    } else{
+                        addApptToDB(title, desc, location, type, start, end, custId, userId, contactId);
+                        try {
+                            navigateViews(mainMenuPath, event);
+                        }catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                } else {
+                    System.out.println("your appointment overlaps");
+                }
             }
 
-
-
         } else {
-            System.out.println("You missed a field or something");
+            Alert alert = Alerts.customErrorAlert("You're missing something");
+            alert.showAndWait();
         }
 
 

@@ -24,4 +24,11 @@ public class Alerts {
         alert.setContentText(message);
         return alert;
     }
+
+    public static Alert customInfoAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Appointment informagion");
+        alert.setContentText(message);
+        return alert;
+    }
 }

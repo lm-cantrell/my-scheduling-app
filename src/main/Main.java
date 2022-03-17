@@ -59,8 +59,11 @@ public class Main extends Application {
         // test contact select
 //        ContactDB.select();
 //        LocalDateTime curr = LocalDateTime.now();
-//        LocalDateTime curr = LocalDateTime.of(2022, 3, 2, 12, 00);
+//        LocalDateTime start = LocalDateTime.of(2022, 3, 17, 11, 40);
+//        LocalDateTime end = LocalDateTime.of(2022, 3, 17, 12, 40);
 //        Time.getWeek(curr);
+
+//        AppointmentDB.insert("testAlert", "test", "now", "test", start, end, 1, 1, 1);
 
         launch(args);
 

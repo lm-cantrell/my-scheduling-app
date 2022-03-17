@@ -291,6 +291,8 @@ public class MainMenuController implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
+    
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

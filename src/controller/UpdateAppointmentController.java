@@ -1,6 +1,8 @@
 package controller;
 
+import DB.AppointmentDB;
 import DB.ContactDB;
+import helper.Alerts;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,10 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Appointment;
 import model.Contact;
@@ -20,8 +19,11 @@ import model.Contact;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class UpdateAppointmentController implements Initializable {
@@ -76,6 +78,11 @@ public class UpdateAppointmentController implements Initializable {
     private Button updateApptUpdateButton;
 
     @FXML
+    void onActionFilterStart(ActionEvent event){
+
+    }
+
+    @FXML
     private TextField updateApptUserIdTxt;
 
     public UpdateAppointmentController() throws SQLException {
@@ -92,22 +99,75 @@ public class UpdateAppointmentController implements Initializable {
     }
 
     @FXML
-    void onActionDeleteAppt(ActionEvent event) {
+    void onActionDeleteAppt(ActionEvent event) throws SQLException {
 
+        int id = Integer.valueOf(updateApptIdTxt.getText());
+        String type = updateApptTypeTxt.getText();
+        Alert alert = Alerts.customConfirmationAlert("Are you sure you want to delete this " + type + " appointment with ID: " + id + "?");
+        if(alert.showAndWait().get() == ButtonType.OK){
+            System.out.println("deletion confirmed");
+            int idToDelete = Integer.parseInt(updateApptIdTxt.getText());
+            AppointmentDB.delete(idToDelete);
+
+            try {
+                navigateViews(mainMenuPath, event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
-    void onActionFilterEnd(ActionEvent event) {
+    void onActionUpdateAppt(ActionEvent event) throws SQLException {
+        
+        if(allFieldsSelected()){
+            Alert alert = Alerts.customConfirmationAlert("Are you sure you want to change this appointment?");
+            if(alert.showAndWait().get() == ButtonType.OK){
+                String title = updateApptTitleTxt.getText();
+                String desc = updateApptDescTxt.getText();
+                String location = updateApptLocationTxt.getText();
+                String type = updateApptTypeTxt.getText();
+                LocalDate localDate = updateApptStartDatePick.getValue();
+                LocalTime startLt = updateApptStartTimeCombo.getValue();
+                LocalTime endLt = updateApptEndTimeCombo.getValue();
+                LocalDateTime start = LocalDateTime.of(localDate, startLt);
+                LocalDateTime end = LocalDateTime.of(localDate, endLt);
+                int custId = Integer.valueOf(updateApptCustIdTxt.getText());
+                int userId = Integer.valueOf(updateApptUserIdTxt.getText());
+                Contact selectedContact = updateApptContactCombo.getValue();
+                int contactId = selectedContact.getContactId();
+                int apptId = Integer.valueOf(updateApptIdTxt.getText());
 
-    }
+                if(end.isBefore(start) || end.isEqual(start)){
+                    Alert badTimeAlert = Alerts.customErrorAlert("Start time must be before the end of the appointment");
+                    badTimeAlert.showAndWait();
+                } else {
+                    if(!hasOverlap(start, end, custId, apptId)){
 
-    @FXML
-    void onActionFilterStart(ActionEvent event) {
+                        if(localDate.getDayOfWeek() == DayOfWeek.SATURDAY || localDate.getDayOfWeek() == DayOfWeek.SUNDAY){
+                            Alert notBusHours = Alerts.customErrorAlert("Business hours don't include weekends. Please chose another date.");
+                            notBusHours.showAndWait();
+                        } else {
+                            AppointmentDB.update(apptId, title, desc, location, type, start, end, custId, userId, contactId);
+                            try {
+                                navigateViews(mainMenuPath, event);
+                            } catch (IOException e){
+                                e.printStackTrace();
+                            }
+                        }
 
-    }
-
-    @FXML
-    void onActionUpdateAppt(ActionEvent event) {
+                    } else {
+                        System.out.println("there's overlap");
+                        Alert overlapAlert = Alerts.customErrorAlert("There's an overlap with an existing appointment");
+                        overlapAlert.showAndWait();
+                    }
+                }
+                
+            }
+        } else{
+            Alert alert = Alerts.customErrorAlert("You're missing something.");
+            alert.showAndWait();
+        }
 
     }
 
@@ -118,6 +178,64 @@ public class UpdateAppointmentController implements Initializable {
         stage.show();
     }
 
+    public boolean allFieldsSelected(){
+        if (updateApptTitleTxt.getText().isEmpty() ||
+                updateApptDescTxt.getText().isEmpty() ||
+                updateApptLocationTxt.getText().isEmpty() ||
+                updateApptContactCombo.getValue() == null ||
+                updateApptTypeTxt.getText().isEmpty() ||
+                updateApptCustIdTxt.getText().isEmpty() ||
+                updateApptUserIdTxt.getText().isEmpty() ||
+                updateApptStartDatePick.getValue() == null ||
+                updateApptStartTimeCombo.getValue() == null ||
+                updateApptEndTimeCombo.getValue() == null){
+            System.out.println("missed a field");
+            return false;
+        } else {
+            System.out.println("all fields have info");
+            return true;
+        }
+
+    }
+
+    public static boolean hasOverlap(LocalDateTime aStart, LocalDateTime aEnd, int currCustId, int inputApptId) throws SQLException {
+
+        ObservableList<Appointment> custAppts = AppointmentDB.selectByCust(currCustId);
+        ArrayList<Appointment> overlap = new ArrayList<Appointment>();
+        custAppts.forEach(appointment -> {
+            //check current appointment for overlap with appointment argument
+
+
+            LocalDateTime bStart = appointment.getStartDateTime();
+
+            LocalDateTime bEnd = appointment.getEndDateTime();
+            if((aStart.isAfter(bStart) || aStart.isEqual(bStart)) && (aStart.isBefore(bEnd))){
+                if(appointment.getAppointmentId() != inputApptId){
+                    overlap.add(appointment);
+                }
+
+            }
+            if((aEnd.isAfter(bStart)) && (aEnd.isBefore(bEnd) || aEnd.isEqual(bEnd))){
+                if(appointment.getAppointmentId() != inputApptId){
+                    overlap.add(appointment);
+                }
+            }
+            if((aStart.isBefore(bStart) || aStart.isEqual(bStart)) && (aEnd.isAfter(bEnd) || aEnd.isEqual(bEnd))){
+                if(appointment.getAppointmentId() != inputApptId){
+                    overlap.add(appointment);
+                }
+            }
+        });
+
+        if(overlap.size() > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+//  moved to MainMenuController
 //    public void generateTimesList() {
 //        for ( int i = 8; i < 23; i++) {
 //            LocalDate selectedDate = updateApptStartDatePick.getValue();

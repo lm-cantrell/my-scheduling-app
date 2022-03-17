@@ -10,6 +10,7 @@ public class User {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
+
     }
 
     public int getUserId() {
@@ -27,6 +28,7 @@ public class User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
 
     public String getPassword() {
         return password;

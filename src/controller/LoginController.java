@@ -1,7 +1,9 @@
 package controller;
 
+import DB.AppointmentDB;
 import DB.UserDB;
 import helper.Alerts;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +12,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Appointment;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.*;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -24,6 +31,7 @@ public class LoginController implements Initializable {
     Parent scene;
 
     String mainMenuPath = "/view/MainMenu.fxml";
+    private ObservableList<Appointment> allAppointments = AppointmentDB.select();
 
     @FXML
     private Button exitButton;
@@ -51,6 +59,9 @@ public class LoginController implements Initializable {
 
     @FXML
     private TextField usernameText;
+
+    public LoginController() throws SQLException {
+    }
 
     @FXML
     void onActionExitApplication(ActionEvent event) {
@@ -84,12 +95,38 @@ public class LoginController implements Initializable {
                 Alert alert = Alerts.customErrorAlert(alertString);
                 alert.show();
             } else {
+                checkFifteenMinWindow();
                 navigateViews(mainMenuPath, event);
             }
 
 
         } catch (IOException | SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void checkFifteenMinWindow(){
+        LocalDate today = LocalDate.now();
+        ArrayList<Appointment> windowAppts = new ArrayList<Appointment>();
+        LocalTime current = LocalTime.now();
+        LocalTime endWindow = current.plusMinutes(15);
+        for(Appointment appt : allAppointments){
+            LocalDateTime apptStart = appt.getStartDateTime();
+            LocalDate apptDate = apptStart.toLocalDate();
+            if(apptDate.isEqual(today) && (apptStart.toLocalTime().isAfter(current) && apptStart.toLocalTime().isBefore(endWindow))){
+                windowAppts.add(appt);
+            }
+        }
+        if(!windowAppts.isEmpty()){
+            int messageId = windowAppts.get(0).getAppointmentId();
+            LocalDate messageDate = windowAppts.get(0).getStartDateTime().toLocalDate();
+            LocalTime messageTime = windowAppts.get(0).getStartDateTime().toLocalTime();
+            String alertMessage = "There is an appointment scheduled within the next 15 minutes. ID: " + messageId + " | Scheduled date and time: " + messageDate + " " + messageTime;
+            Alert hasAppt = Alerts.customInfoAlert(alertMessage);
+            hasAppt.showAndWait();
+        } else {
+            Alert noAppt = Alerts.customInfoAlert("No upcoming appointments");
+            noAppt.showAndWait();
         }
     }
 
@@ -103,8 +140,8 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-//            Locale locale = Locale.getDefault();
-            Locale locale = Locale.FRANCE;
+            Locale locale = Locale.getDefault();
+//            Locale locale = Locale.FRANCE;
             resourceBundle = ResourceBundle.getBundle("assets/Nat", locale);
             System.out.println("got the bundle");
 
