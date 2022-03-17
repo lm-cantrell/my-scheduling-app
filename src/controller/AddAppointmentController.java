@@ -159,15 +159,18 @@ public class AddAppointmentController implements Initializable {
         for ( int i = 8; i < 23; i++) {
             LocalDate selectedDate = addApptStartDatePick.getValue();
             LocalTime thisTime = LocalTime.of(i, 0);
+            LocalTime thisHalfTime = LocalTime.of(i, 30);
             LocalDateTime easternLdt = LocalDateTime.of(selectedDate, thisTime);
+            LocalDateTime easternHalfLdt = LocalDateTime.of(selectedDate, thisHalfTime);
 
             ZoneId localZone = ZoneId.systemDefault();
             ZonedDateTime easternZdt = ZonedDateTime.of(easternLdt, ZoneId.of("America/New_York"));
+            ZonedDateTime easternHalfZdt = ZonedDateTime.of(easternHalfLdt, ZoneId.of("America/New_York"));
             ZonedDateTime localZdt = Time.easternToLocalSys(easternZdt);
-
-
+            ZonedDateTime localHalfZdt = Time.easternToLocalSys(easternHalfZdt);
 
             scheduleTimes.add(localZdt.toLocalTime());
+            scheduleTimes.add(localHalfZdt.toLocalTime());
         }
 
     }

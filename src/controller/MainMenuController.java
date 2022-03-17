@@ -19,9 +19,7 @@ import model.Appointment;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Month;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -38,6 +36,7 @@ public class MainMenuController implements Initializable {
     private String reportsPath = "/view/Reports.fxml";
 
     private ObservableList<Appointment> allAppointments = AppointmentDB.select();
+    private ObservableList<LocalTime> scheduleTimes = FXCollections.observableArrayList();
 
 
     @FXML
@@ -134,11 +133,39 @@ public class MainMenuController implements Initializable {
 
     @FXML
     void onActionNavModifyAppointment(ActionEvent event) {
-        try {
-            navigateViews(updateApptPath, event);
-        } catch (IOException e) {
-            e.printStackTrace();
+//        try {
+//            navigateViews(updateApptPath, event);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        generateTimesList();
+
+        if( mainAppointmentTableview.getSelectionModel().getSelectedItem() == null){
+            Alert alert = Alerts.customErrorAlert("You must select an appointment to update.");
+            alert.showAndWait();
+        } else {
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource(updateApptPath));
+                loader.load();
+
+                UpdateAppointmentController updateApptController = loader.getController();
+                updateApptController.sendAppt(mainAppointmentTableview.getSelectionModel().getSelectedItem(), scheduleTimes);
+
+                stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+                Parent scene = loader.getRoot();
+                stage.setScene(new Scene(scene));
+                stage.show();
+
+
+            } catch (NullPointerException | IOException | SQLException e) {
+                //implement missed selection error
+                e.printStackTrace();
+            }
         }
+
+
+
     }
 
     @FXML
@@ -157,6 +184,26 @@ public class MainMenuController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void generateTimesList() {
+        for ( int i = 8; i < 23; i++) {
+            LocalDate date = LocalDate.now();
+            LocalTime thisTime = LocalTime.of(i, 0);
+            LocalTime thisHalfTime = LocalTime.of(i, 30);
+            LocalDateTime easternLdt = LocalDateTime.of(date, thisTime);
+            LocalDateTime easternHalfLdt = LocalDateTime.of(date, thisHalfTime);
+
+            ZoneId localZone = ZoneId.systemDefault();
+            ZonedDateTime easternZdt = ZonedDateTime.of(easternLdt, ZoneId.of("America/New_York"));
+            ZonedDateTime easternHalfZdt = ZonedDateTime.of(easternHalfLdt, ZoneId.of("America/New_York"));
+            ZonedDateTime localZdt = Time.easternToLocalSys(easternZdt);
+            ZonedDateTime localHalfZdt = Time.easternToLocalSys(easternHalfZdt);
+
+            scheduleTimes.add(localZdt.toLocalTime());
+            scheduleTimes.add(localHalfZdt.toLocalTime());
+        }
+
     }
 
     @FXML

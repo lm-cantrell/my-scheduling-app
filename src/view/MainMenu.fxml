@@ -54,8 +54,8 @@
                      <toggleGroup>
                         <ToggleGroup fx:id="appointmentFilter" />
                      </toggleGroup></RadioButton>
-                  <RadioButton fx:id="weekApptFilterButton" layoutX="283.0" layoutY="23.0" mnemonicParsing="false" onAction="#onActionShowByWeek" text="By Month" textFill="#4d8076" toggleGroup="$appointmentFilter" />
-                  <RadioButton fx:id="monthApptFilterButton" layoutX="372.0" layoutY="23.0" mnemonicParsing="false" onAction="#onActionShowByMonth" text="By Week" textFill="#4d8076" toggleGroup="$appointmentFilter" />
+                  <RadioButton fx:id="weekApptFilterButton" layoutX="283.0" layoutY="23.0" mnemonicParsing="false" onAction="#onActionShowByWeek" text="By Week" textFill="#4d8076" toggleGroup="$appointmentFilter" />
+                  <RadioButton fx:id="monthApptFilterButton" layoutX="372.0" layoutY="23.0" mnemonicParsing="false" onAction="#onActionShowByMonth" text="By Month" textFill="#4d8076" toggleGroup="$appointmentFilter" />
                   <TableView fx:id="mainAppointmentTableview" layoutX="-42.0" layoutY="73.0" prefHeight="247.0" prefWidth="500.0">
                     <columns>
                       <TableColumn fx:id="apptIdCol" prefWidth="30.0" text="ID" />
