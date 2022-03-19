@@ -8,9 +8,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** DivisionDB class manages sql queries related to division database.
+ * @author Lisa Cantrell
+ * */
+
 public abstract class DivisionDB {
 
-
+    /** select method queries database for all divisions.
+     * @return allDivisionsList
+     * */
     public static ObservableList select() throws SQLException{
         String sql = "SELECT * FROM first_level_divisions";
         PreparedStatement ps = null;
@@ -43,6 +49,10 @@ public abstract class DivisionDB {
         }
     }
 
+    /** select method overloaded with division name queries database for specific division.
+     * @param division_name
+     * @return selectedDivision
+     * */
     public static Division select(String division_name) throws SQLException {
         String sql = "SELECT * FROM first_level_divisions WHERE Division = ?";
         PreparedStatement ps = null;

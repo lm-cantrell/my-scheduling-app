@@ -8,8 +8,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** CustomerDB class manages sql queries related to customer database.
+ * @author Lisa Cantrell
+ * */
+
 public abstract class CustomerDB {
 
+    /** insert method inserts row of data into customer database.
+     * @param name
+     * @param address
+     * @param postalCode
+     * @param phoneNum
+     * @param divId
+     * */
     public static int insert(String name, String address, String postalCode, String phoneNum, int divId) throws SQLException {
 
         String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES(?, ?, ?, ?, ?)";
@@ -36,6 +47,14 @@ public abstract class CustomerDB {
 
     }
 
+    /** update method updates row of data in customer database.
+     * @param id
+     * @param name
+     * @param address
+     * @param postalCode
+     * @param phoneNum
+     * @param divId
+     * */
     public static int update(int id, String name, String address, String postalCode, String phoneNum, int divId) throws SQLException {
         String sql = "UPDATE CUSTOMERS SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
 
@@ -60,6 +79,9 @@ public abstract class CustomerDB {
 
     }
 
+    /** delete method deletes row associated with customer ID from database.
+     * @param id customer ID
+     * */
     public static int delete(int id) throws SQLException{
         String sql = "DELETE FROM CUSTOMERS WHERE Customer_ID = ?";
         PreparedStatement ps = null;
@@ -79,6 +101,9 @@ public abstract class CustomerDB {
 
     }
 
+    /** select method queries database for all customers.
+     * @return allCustList
+     * */
     public static ObservableList select() throws SQLException{
         String sql = "SELECT * FROM CUSTOMERS";
         PreparedStatement ps = null;
@@ -137,6 +162,9 @@ public abstract class CustomerDB {
 
     }
 
+    /** select method overloaded with customer id queries database for customer with specific id.
+     * @return currCustomer
+     * */
     public static Customer select(int id) throws SQLException{
         String sql = "SELECT * FROM CUSTOMERS WHERE Customer_ID = ?";
         PreparedStatement ps = null;

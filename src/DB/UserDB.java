@@ -6,8 +6,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** UserDB class manages sql queries related to user database.
+ * @author Lisa Cantrell
+ * */
+
 public abstract class UserDB {
 
+    /** getUserIDFromLogin returns a userID from a query using username and password, if the match exists.
+     * if no match exists, returns 0
+     * @param username
+     * @param password
+     * @return userId
+     * */
     public static int getUserIDFromLogin(String username, String password) throws SQLException {
         String sql = "SELECT * FROM users WHERE User_Name = ? AND Password = ?";
 
@@ -39,6 +49,10 @@ public abstract class UserDB {
 
     }
 
+    /** selectCurrUser method queries database for specific user.
+     * @param userId
+     * @return currUser
+     * */
     public static User selectCurrUser(int userId) throws SQLException {
         String sql = "SELECT * FROM users WHERE User_ID = ?";
 

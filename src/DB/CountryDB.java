@@ -8,8 +8,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** CountryDB class manages sql queries related to country database.
+ * @author Lisa Cantrell
+ * */
+
 public abstract class CountryDB {
 
+    /** select method queries database for all countries.
+     * @return allCountryList
+     * */
     public static ObservableList select() throws SQLException {
         String sql = "SELECT * FROM countries";
         PreparedStatement ps = null;

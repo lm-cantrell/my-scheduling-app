@@ -3,6 +3,9 @@ package DB;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/** JDBC class manages connection to sql database.
+ * @author Lisa Cantrell
+ * */
 public abstract class JDBC {
 
     private static final String protocol = "jdbc";
@@ -16,6 +19,7 @@ public abstract class JDBC {
     private static final String password = "Passw0rd!"; // Password
     public static Connection connection;  // Connection Interface
 
+    /** openConnection establishes connectivity with database. */
     public static void openConnection()
     {
         try {
@@ -29,6 +33,7 @@ public abstract class JDBC {
         }
     }
 
+    /** closeConnection closes connectivity with database. */
     public static void closeConnection() {
         try {
             connection.close();

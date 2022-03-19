@@ -7,9 +7,23 @@ import model.Appointment;
 import java.sql.*;
 import java.time.LocalDateTime;
 
+/** AppointmentDB class manages sql queries related to appointment database.
+ * @author Lisa Cantrell
+ * */
+
 public abstract class AppointmentDB {
 
-    //insert
+    /** insert method inserts row of data into appointment database.
+     * @param title
+     * @param desc description
+     * @param loc location
+     * @param type
+     * @param start start date and time
+     * @param end end date and time
+     * @param custId
+     * @param userId
+     * @param contactId
+     * */
     public static int insert(String title, String desc, String loc, String type, LocalDateTime start, LocalDateTime end, int custId, int userId, int contactId) throws SQLException {
         String sql = "INSERT INTO APPOINTMENTS (Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -37,7 +51,18 @@ public abstract class AppointmentDB {
 
     }
 
-    //update
+    /** update method updates row of data in appointment database.
+     * @param id appointment ID
+     * @param title
+     * @param desc description
+     * @param loc location
+     * @param type
+     * @param start start date and time
+     * @param end end date and time
+     * @param custId
+     * @param userId
+     * @param contactId
+     * */
     public static int update(int id, String title, String desc, String loc, String type, LocalDateTime start, LocalDateTime end, int custId, int userId, int contactId) throws SQLException{
 
         String sql = "UPDATE APPOINTMENTS SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
@@ -68,7 +93,9 @@ public abstract class AppointmentDB {
 
     }
 
-    //delete
+    /** delete method deletes row associated with appointment ID from database.
+     * @param id appointment ID
+     * */
     public static int delete(int id) throws SQLException{
 
         String sql = "DELETE FROM APPOINTMENTS WHERE Appointment_ID = ?";
@@ -89,7 +116,9 @@ public abstract class AppointmentDB {
         }
     }
 
-    //select and overloaded select
+    /** select method queries database for all appointments.
+     * @return allApptList
+     * */
     public static ObservableList select() throws SQLException{
 
         String sql = "SELECT * FROM APPOINTMENTS";
@@ -132,6 +161,9 @@ public abstract class AppointmentDB {
         }
     }
 
+    /** select method overloaded with appointment id queries database for appointment with specific id.
+     * @return allApptList
+     * */
     public static ObservableList select(int id) throws SQLException{
         String sql = "SELECT * FROM APPOINTMENTS WHERE Appointment_ID = ?";
         PreparedStatement ps = null;
@@ -174,6 +206,10 @@ public abstract class AppointmentDB {
         }
     }
 
+    /** selectByCust method queries data by customer id to return list of appointments for specific customer.
+     * @param custId
+     * @return allApptList
+     * */
     public static ObservableList selectByCust(int custId) throws SQLException {
         String sql = "SELECT * FROM APPOINTMENTS WHERE Customer_ID = ?";
         PreparedStatement ps = null;

@@ -8,8 +8,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** ContactDB class manages sql queries related to contact database.
+ * @author Lisa Cantrell
+ * */
+
 public abstract class ContactDB {
 
+    /** select method queries database for all contacts.
+     * @return allContactsList
+     * */
     public static ObservableList<Contact> select() throws SQLException{
         String sql = "SELECT * FROM contacts";
         PreparedStatement ps = null;
@@ -43,6 +50,10 @@ public abstract class ContactDB {
         }
     }
 
+    /** select method overloaded with contact ID queries database for specific contact.
+     * @param contactId
+     * @return selectedContact
+     * */
     public static Contact select(int contactId) throws SQLException {
         String sql = "SELECT * FROM contacts WHERE Contact_ID = ?";
         PreparedStatement ps = null;
