@@ -96,19 +96,6 @@ public class AddAppointmentController implements Initializable {
             Contact selectedContact = addApptContactCombo.getValue();
             int contactId = selectedContact.getContactId();
 
-//            ZonedDateTime startLocal = ZonedDateTime.of(start, ZoneId.systemDefault());
-//            ZonedDateTime endLocal = ZonedDateTime.of(end, ZoneId.systemDefault());
-//            System.out.println("start in local: " + startLocal);
-//            System.out.println("end in local: " + endLocal);
-//
-//
-//            ZonedDateTime startUtcZdt = Time.localToUtc(startLocal);
-//            ZonedDateTime endUtcZdt = Time.localToUtc(endLocal);
-//            System.out.println("start in utc: " + startUtcZdt);
-//            System.out.println("end in utc: " + endUtcZdt);
-//
-//            LocalDateTime startUtcLdt = startUtcZdt.toLocalDateTime();
-//            LocalDateTime endUtcLdt = endUtcZdt.toLocalDateTime();
 
             if(end.isBefore(start) || end.isEqual(start)){
                 Alert badTimeAlert = Alerts.customErrorAlert("Start time must be before the end of the appointment");
@@ -129,7 +116,8 @@ public class AddAppointmentController implements Initializable {
                     }
 
                 } else {
-                    System.out.println("your appointment overlaps");
+                    Alert alert = Alerts.customErrorAlert("Your appointment overlaps with an existing appointment.");
+                    alert.showAndWait();
                 }
             }
 
@@ -194,10 +182,10 @@ public class AddAppointmentController implements Initializable {
                 addApptStartDatePick.getValue() == null ||
                 addApptStartTimeCombo.getValue() == null ||
                 addApptEndTimeCombo.getValue() == null){
-            System.out.println("missed a field");
+            Alert alert = Alerts.customErrorAlert("You're missing a field.");
+            alert.showAndWait();
             return false;
         } else {
-            System.out.println("all fields have info");
             return true;
         }
 
@@ -208,7 +196,6 @@ public class AddAppointmentController implements Initializable {
                             int userId, int contactId) throws SQLException {
         try {
             AppointmentDB.insert(title, desc, location, type, start, end, custId, userId, contactId);
-            System.out.println("appointment added to the db");
         } catch(SQLException ex) {
             ex.printStackTrace();
         }
@@ -219,8 +206,6 @@ public class AddAppointmentController implements Initializable {
         ObservableList<Appointment> custAppts = AppointmentDB.selectByCust(currCustId);
         ArrayList<Appointment> overlap = new ArrayList<Appointment>();
         custAppts.forEach(appointment -> {
-            //check current appointment for overlap with appointment argument
-
 
             LocalDateTime bStart = appointment.getStartDateTime();
 
@@ -247,15 +232,10 @@ public class AddAppointmentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
-
         addApptStartDatePick.setValue(LocalDate.now());
 
-
         generateTimesList();
-        //convert from eastern to Local system time to display
 
-        //currently not in local time
         addApptStartTimeCombo.setItems(scheduleTimes);
         addApptStartTimeCombo.setVisibleRowCount(5);
         addApptStartTimeCombo.setPromptText("Start time...");

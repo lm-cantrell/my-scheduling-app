@@ -154,7 +154,6 @@ public class LoginController implements Initializable {
             Locale locale = Locale.getDefault();
 //            Locale locale = Locale.FRANCE;
             resourceBundle = ResourceBundle.getBundle("assets/Nat", locale);
-            System.out.println("got the bundle");
 
             regionLabel.setText(resourceBundle.getString("region"));
             regionDetailsLabel.setText(String.valueOf(locale));

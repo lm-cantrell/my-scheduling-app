@@ -38,5 +38,4 @@ public class User {
         this.password = password;
     }
 
-    //create user login method maybe
 }

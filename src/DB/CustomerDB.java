@@ -12,7 +12,6 @@ public abstract class CustomerDB {
 
     public static int insert(String name, String address, String postalCode, String phoneNum, int divId) throws SQLException {
 
-        System.out.println("customer insert called");
         String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES(?, ?, ?, ?, ?)";
 
         PreparedStatement ps = null;
@@ -38,7 +37,6 @@ public abstract class CustomerDB {
     }
 
     public static int update(int id, String name, String address, String postalCode, String phoneNum, int divId) throws SQLException {
-        System.out.println("customer update called");
         String sql = "UPDATE CUSTOMERS SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
 
         PreparedStatement ps = null;
@@ -53,7 +51,6 @@ public abstract class CustomerDB {
             ps.setInt(6, id);
 
             int rowsAffected = ps.executeUpdate();
-            System.out.println("update executed");
             return rowsAffected;
         } finally {
             if(ps != null) {
@@ -64,7 +61,6 @@ public abstract class CustomerDB {
     }
 
     public static int delete(int id) throws SQLException{
-        System.out.println("customer delete called");
         String sql = "DELETE FROM CUSTOMERS WHERE Customer_ID = ?";
         PreparedStatement ps = null;
 
@@ -126,7 +122,6 @@ public abstract class CustomerDB {
 
                 Customer currCustomer = new Customer(custId, custName, address, postCode, phone, country, division);
                 allCustList.add(currCustomer);
-                System.out.println(custId + " | " + custName + " | " + address + " | " + postCode + " | " + phone + " | " + country + " | " + division);
             }
 
             return allCustList;
@@ -183,7 +178,6 @@ public abstract class CustomerDB {
 
 
             Customer currCustomer = new Customer(custId, custName, address, postCode, phone, country, division);
-            System.out.println(custId + " | " + custName + " | " + address + " | " + postCode + " | " + phone + " | " + country + " | " + division);
 
             return currCustomer;
         } finally {

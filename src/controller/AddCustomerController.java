@@ -3,6 +3,7 @@ package controller;
 import DB.CountryDB;
 import DB.CustomerDB;
 import DB.DivisionDB;
+import helper.Alerts;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -146,10 +147,10 @@ public class AddCustomerController implements Initializable {
             addCustPhoneTxt.getText().isEmpty() ||
             addCustCountryCombo.getValue() == null||
             addCustDivCombo.getValue() == null){
-            System.out.println("Missed a field");
+            Alert alert = Alerts.customErrorAlert("You're missing a field.");
+            alert.showAndWait();
             return false;
         } else {
-            System.out.println("all fields have info");
             return true;
         }
 
@@ -161,7 +162,6 @@ public class AddCustomerController implements Initializable {
 
         try {
             CustomerDB.insert(name, address, postal, phone, divId);
-            System.out.println("Customer added to db");
         } catch(SQLException ex) {
             ex.printStackTrace();
         }
@@ -191,7 +191,6 @@ public class AddCustomerController implements Initializable {
 
         addCustCountryCombo.setItems(allCountries);
         addCustCountryCombo.setPromptText("Select country...");
-//        addCustCountryCombo.getSelectionModel().select(0);
 
         System.out.println("I'm initialized");
     }

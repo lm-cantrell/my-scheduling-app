@@ -58,9 +58,6 @@ public abstract class UserDB {
 
             currUser = new User(userId, userName, userPassword);
 
-
-            System.out.println("current user is " + userName);
-
             return currUser;
         } finally {
             if(ps != null) {

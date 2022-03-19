@@ -133,11 +133,7 @@ public class MainMenuController implements Initializable {
 
     @FXML
     void onActionNavModifyAppointment(ActionEvent event) {
-//        try {
-//            navigateViews(updateApptPath, event);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+
         generateTimesList();
 
         if( mainAppointmentTableview.getSelectionModel().getSelectedItem() == null){
@@ -159,7 +155,6 @@ public class MainMenuController implements Initializable {
 
 
             } catch (NullPointerException | IOException | SQLException e) {
-                //implement missed selection error
                 e.printStackTrace();
             }
         }

@@ -11,7 +11,6 @@ public abstract class AppointmentDB {
 
     //insert
     public static int insert(String title, String desc, String loc, String type, LocalDateTime start, LocalDateTime end, int custId, int userId, int contactId) throws SQLException {
-        System.out.println("appointment insert called");
         String sql = "INSERT INTO APPOINTMENTS (Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement ps = null;
@@ -40,7 +39,7 @@ public abstract class AppointmentDB {
 
     //update
     public static int update(int id, String title, String desc, String loc, String type, LocalDateTime start, LocalDateTime end, int custId, int userId, int contactId) throws SQLException{
-        System.out.println("appointment update called");
+
         String sql = "UPDATE APPOINTMENTS SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
 
         PreparedStatement ps = null;
@@ -71,7 +70,7 @@ public abstract class AppointmentDB {
 
     //delete
     public static int delete(int id) throws SQLException{
-        System.out.println("appointment delete called");
+
         String sql = "DELETE FROM APPOINTMENTS WHERE Appointment_ID = ?";
         PreparedStatement ps = null;
 
@@ -92,7 +91,7 @@ public abstract class AppointmentDB {
 
     //select and overloaded select
     public static ObservableList select() throws SQLException{
-//        System.out.println("appointment select all called");
+
         String sql = "SELECT * FROM APPOINTMENTS";
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -119,7 +118,6 @@ public abstract class AppointmentDB {
 
                 Appointment currAppointment = new Appointment(apptId, title, description, location, type, start, end, custId, userId, contactId);
                 allApptList.add(currAppointment);
-//                System.out.println(apptId + " | " + title + " | " + description + " | " + location + " | " + type + " | " + start + " | " + end + " | " + custId + " | " + userId + " | " + contactId);
             }
 
             return allApptList;
@@ -135,7 +133,6 @@ public abstract class AppointmentDB {
     }
 
     public static ObservableList select(int id) throws SQLException{
-        System.out.println("appointment select all called for appt id: " + id);
         String sql = "SELECT * FROM APPOINTMENTS WHERE Appointment_ID = ?";
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -163,7 +160,6 @@ public abstract class AppointmentDB {
 
                 Appointment currAppointment = new Appointment(apptId, title, description, location, type, start, end, custId, userId, contactId);
                 allApptList.add(currAppointment);
-                System.out.println(apptId + " | " + title + " | " + description + " | " + location + " | " + type + " | " + start + " | " + end + " | " + custId + " | " + userId + " | " + contactId);
             }
 
             return allApptList;
@@ -206,7 +202,6 @@ public abstract class AppointmentDB {
 
                 Appointment currAppointment = new Appointment(apptId, title, description, location, type, start, end, currCustId, userId, contactId);
                 allApptList.add(currAppointment);
-                System.out.println(apptId + " | " + title + " | " + description + " | " + location + " | " + type + " | " + start + " | " + end + " | " + currCustId + " | " + userId + " | " + contactId);
             }
 
             return allApptList;

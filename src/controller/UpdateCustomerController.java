@@ -115,7 +115,6 @@ public class UpdateCustomerController implements Initializable {
     void onClickCheckSelection(MouseEvent event){
         filteredDivisions.clear();
 
-        System.out.println("tableview clicked. check selection called");
         Customer selectedCust =  updateCustTableview.getSelectionModel().getSelectedItem();
 
         updateCustIdTxt.setText(String.valueOf(selectedCust.getCustomerId()));
@@ -180,9 +179,9 @@ public class UpdateCustomerController implements Initializable {
                 }
             }
 
-            System.out.println("HAS SELECTION, CLICKED DELETE, no appts");
         }else {
-            System.out.println("NO TABLEVIEW SELECTION, CLICKED DELETE");
+            Alert alert = Alerts.customInfoAlert("You need to select a customer to delete.");
+            alert.showAndWait();
         }
     }
 

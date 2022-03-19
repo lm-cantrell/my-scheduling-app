@@ -150,7 +150,6 @@ public class ReportsController implements Initializable {
         apptTypeMonthTableView.setItems(typeFiltered);
 
         Month selectedMonth = apptMonthCombo.getValue();
-//        ObservableList<Appointment> currentList = apptTypeMonthTableView.getItems();
         for(Appointment appt : typeFiltered){
             if(appt.getStartDateTime().getMonth().equals(selectedMonth)){
                 monthFiltered.add(appt);

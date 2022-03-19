@@ -105,7 +105,6 @@ public class UpdateAppointmentController implements Initializable {
         String type = updateApptTypeTxt.getText();
         Alert alert = Alerts.customConfirmationAlert("Are you sure you want to delete this " + type + " appointment with ID: " + id + "?");
         if(alert.showAndWait().get() == ButtonType.OK){
-            System.out.println("deletion confirmed");
             int idToDelete = Integer.parseInt(updateApptIdTxt.getText());
             AppointmentDB.delete(idToDelete);
 
@@ -157,7 +156,6 @@ public class UpdateAppointmentController implements Initializable {
                         }
 
                     } else {
-                        System.out.println("there's overlap");
                         Alert overlapAlert = Alerts.customErrorAlert("There's an overlap with an existing appointment");
                         overlapAlert.showAndWait();
                     }
@@ -189,10 +187,10 @@ public class UpdateAppointmentController implements Initializable {
                 updateApptStartDatePick.getValue() == null ||
                 updateApptStartTimeCombo.getValue() == null ||
                 updateApptEndTimeCombo.getValue() == null){
-            System.out.println("missed a field");
+            Alert alert = Alerts.customErrorAlert("You missed a field.");
+            alert.showAndWait();
             return false;
         } else {
-            System.out.println("all fields have info");
             return true;
         }
 
@@ -203,8 +201,6 @@ public class UpdateAppointmentController implements Initializable {
         ObservableList<Appointment> custAppts = AppointmentDB.selectByCust(currCustId);
         ArrayList<Appointment> overlap = new ArrayList<Appointment>();
         custAppts.forEach(appointment -> {
-            //check current appointment for overlap with appointment argument
-
 
             LocalDateTime bStart = appointment.getStartDateTime();
 
@@ -233,28 +229,6 @@ public class UpdateAppointmentController implements Initializable {
             return false;
         }
     }
-
-
-//  moved to MainMenuController
-//    public void generateTimesList() {
-//        for ( int i = 8; i < 23; i++) {
-//            LocalDate selectedDate = updateApptStartDatePick.getValue();
-//            LocalTime thisTime = LocalTime.of(i, 0);
-//            LocalTime thisHalfTime = LocalTime.of(i, 30);
-//            LocalDateTime easternLdt = LocalDateTime.of(selectedDate, thisTime);
-//            LocalDateTime easternHalfLdt = LocalDateTime.of(selectedDate, thisHalfTime);
-//
-//            ZoneId localZone = ZoneId.systemDefault();
-//            ZonedDateTime easternZdt = ZonedDateTime.of(easternLdt, ZoneId.of("America/New_York"));
-//            ZonedDateTime easternHalfZdt = ZonedDateTime.of(easternHalfLdt, ZoneId.of("America/New_York"));
-//            ZonedDateTime localZdt = Time.easternToLocalSys(easternZdt);
-//            ZonedDateTime localHalfZdt = Time.easternToLocalSys(easternHalfZdt);
-//
-//            scheduleTimes.add(localZdt.toLocalTime());
-//            scheduleTimes.add(localHalfZdt.toLocalTime());
-//        }
-//
-//    }
 
     public void sendAppt(Appointment appointment, ObservableList times) throws SQLException {
         updateApptIdTxt.setText(String.valueOf(appointment.getAppointmentId()));

@@ -29,7 +29,6 @@ public abstract class DivisionDB {
 
                 Division currDivision = new Division(divId, division, assocCountryId);
                 allDivisionsList.add(currDivision);
-                System.out.println(divId + " | " + division + " | " + assocCountryId);
             }
 
             return allDivisionsList;
@@ -60,8 +59,6 @@ public abstract class DivisionDB {
             int assocCountryId = rs.getInt("Country_ID");
 
             Division selectedDivision = new Division(divId, division, assocCountryId);
-
-            System.out.println(divId + " | " + division + " | " + assocCountryId);
 
             return selectedDivision;
 

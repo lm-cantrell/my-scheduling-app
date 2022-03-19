@@ -10,11 +10,6 @@ import java.util.HashMap;
 public abstract class Time {
 
 
-//    public ZoneId getUserZoneId(){
-//        return  ZoneId.systemDefault();
-//    }
-
-
     public static ZonedDateTime utcToSysLocal (ZonedDateTime utcZdtObject){
         ZoneId sysLocalZone = ZoneId.systemDefault();
         ZonedDateTime sysLocalZdtObject = ZonedDateTime.ofInstant(utcZdtObject.toInstant(), sysLocalZone);
@@ -59,7 +54,6 @@ public abstract class Time {
         weekCalcMap.put(DayOfWeek.FRIDAY, 4);
         weekCalcMap.put(DayOfWeek.SATURDAY, 5);
         weekCalcMap.put(DayOfWeek.SUNDAY, 6);
-        System.out.println(currYear + "|" + currMonth + "|" + currDay);
 
         int adjustmentAmount = weekCalcMap.get(currDay);
 
