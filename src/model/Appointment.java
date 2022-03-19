@@ -19,7 +19,7 @@ public class Appointment {
     private int assocContactId;
 
     /** Appointment constructor.
-     * @param appointmentId primary key in database
+     * @param appointmentId primary key in database.
      * @param title
      * @param description
      * @param location
