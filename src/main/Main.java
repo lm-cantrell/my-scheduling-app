@@ -9,7 +9,14 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
+/** Main class of the application.
+ * @author Lisa Cantrell
+ * */
+
 public class Main extends Application {
+
+    /** Loads the stage and screen that display the GUI.
+     * @param stage path and configuration of the display */
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -18,6 +25,9 @@ public class Main extends Application {
         stage.setScene(new Scene(root, 600, 400));
         stage.show();
     }
+
+    /** The entry point of the application. Launches command line args. Opens and closes the database connection.
+     * @param args command line arguments. */
 
 
     public static void main(String[] args) throws SQLException {

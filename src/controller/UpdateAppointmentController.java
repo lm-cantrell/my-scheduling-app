@@ -107,6 +107,7 @@ public class UpdateAppointmentController implements Initializable {
         if(alert.showAndWait().get() == ButtonType.OK){
             int idToDelete = Integer.parseInt(updateApptIdTxt.getText());
             AppointmentDB.delete(idToDelete);
+            Alert alertDelete = Alerts.customInfoAlert("You've deleted the " + type + " appointment with ID: " + id);
 
             try {
                 navigateViews(mainMenuPath, event);
