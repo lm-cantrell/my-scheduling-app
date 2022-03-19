@@ -107,7 +107,12 @@ public class Appointment {
         this.assocContactId = assocContactId;
     }
 
-    //create method to get localDateTime from string for appt time
+//    @Override
+//    public String toString() {
+//        return getType();
+//    }
+
+//create method to get localDateTime from string for appt time
     //create method to get localDateTime from string for appt start
     //create method to get localDateTime from string for appt end
 }

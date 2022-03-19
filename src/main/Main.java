@@ -65,6 +65,7 @@ public class Main extends Application {
 
 //        AppointmentDB.insert("testAlert", "test", "now", "test", start, end, 1, 1, 1);
 
+
         launch(args);
 
         JDBC.closeConnection();
