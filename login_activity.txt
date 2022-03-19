@@ -1,0 +1,2 @@
+Attempt to login with username: test at 2022-03-19T11:43:03.162046 was successful.
+Attempt to login with username: testLoginFail at 2022-03-19T11:44:21.067909 failed.

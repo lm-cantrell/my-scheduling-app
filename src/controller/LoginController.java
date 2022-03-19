@@ -14,11 +14,13 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Appointment;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.*;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -74,8 +76,6 @@ public class LoginController implements Initializable {
     @FXML
     void onActionLogin(ActionEvent event) {
 
-        //implement input stuff
-        //implement password verification
 
         try {
             String userName = usernameText.getText();
@@ -83,18 +83,29 @@ public class LoginController implements Initializable {
 
             int currUserId = UserDB.getUserIDFromLogin(userName, password);
 
+            String filename = "login_activity.txt";
+            FileWriter fwriter = new FileWriter(filename, true);
+            PrintWriter outputFile = new PrintWriter(fwriter);
+            LocalDateTime loginDT = LocalDateTime.now();
+            String successMsg = "Attempt to login with username: " + userName + " at " + loginDT + " was successful.";
+            String failMsg = "Attempt to login with username: " + userName + " at " + loginDT + " failed.";
+
             if( currUserId == 0) {
-//                Locale locale = Locale.getDefault();
-                Locale locale = Locale.FRANCE;
+                Locale locale = Locale.getDefault();
+//                Locale locale = Locale.FRANCE;
                 String alertString;
                 if(locale == Locale.FRANCE){
                     alertString = "Aucun utilisateur avec ces informations d'identification n'existe. Veuillez entrer des informations d'identification valides";
                 } else {
                     alertString = "No user with those credentials exists. Please enter valid credentials";
                 }
+                outputFile.println(failMsg);
+                outputFile.close();
                 Alert alert = Alerts.customErrorAlert(alertString);
                 alert.show();
             } else {
+                outputFile.println(successMsg);
+                outputFile.close();
                 checkFifteenMinWindow();
                 navigateViews(mainMenuPath, event);
             }
