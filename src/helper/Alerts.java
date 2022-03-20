@@ -2,8 +2,12 @@ package helper;
 
 import javafx.scene.control.Alert;
 
+/** Alerts class contains various custom alerts for use in controllers.
+ * @author Lisa Cantrell
+ * */
 public class Alerts {
 
+    /** confirmExit creates a confirmation alert to confirm exit of application */
     public static Alert confirmExit() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm Exit");
@@ -11,6 +15,8 @@ public class Alerts {
         return alert;
     }
 
+    /** customErrorAlert creates an error alert that displays a custom message from string argument.
+     * @param message  */
     public static Alert customErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -18,6 +24,8 @@ public class Alerts {
         return alert;
     }
 
+    /** customConfirmationAlert creates a confirmation alert that displays a custom message from string argument.
+     * @param message  */
     public static Alert customConfirmationAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm your action");
@@ -25,6 +33,8 @@ public class Alerts {
         return alert;
     }
 
+    /** customInfoAlert creates an info alert that displays a custom message from string argument.
+     * @param message  */
     public static Alert customInfoAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Appointment informagion");

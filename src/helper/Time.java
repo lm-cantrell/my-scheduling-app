@@ -7,9 +7,14 @@ import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 
+/** Time class provides methods for converting and calculated time related objects.
+ * @author Lisa Cantrell
+ * */
+
 public abstract class Time {
 
-
+    /** utcToSysLocal converts object from utc to users system time zone.
+     * @param utcZdtObject  */
     public static ZonedDateTime utcToSysLocal (ZonedDateTime utcZdtObject){
         ZoneId sysLocalZone = ZoneId.systemDefault();
         ZonedDateTime sysLocalZdtObject = ZonedDateTime.ofInstant(utcZdtObject.toInstant(), sysLocalZone);
@@ -17,6 +22,8 @@ public abstract class Time {
         return sysLocalZdtObject;
     }
 
+    /** localToUtc converts object from users system time zone to utc.
+     * @param localZdtObject  */
     public static ZonedDateTime localToUtc(ZonedDateTime localZdtObject){
         ZoneId utcZone = ZoneId.of("UTC");
         ZonedDateTime utcZdtObject = ZonedDateTime.ofInstant(localZdtObject.toInstant(), utcZone);
@@ -24,6 +31,8 @@ public abstract class Time {
         return utcZdtObject;
     }
 
+    /** utcToEaster converts object from utc to eastern region time zone.
+     * @param utcZdtObject  */
     public static ZonedDateTime utcToEastern (ZonedDateTime utcZdtObject) {
         ZoneId newYorkZone = ZoneId.of("America/New_York");
         ZonedDateTime easternZdtObject = ZonedDateTime.ofInstant(utcZdtObject.toInstant(), newYorkZone);
@@ -31,6 +40,8 @@ public abstract class Time {
         return easternZdtObject;
     }
 
+    /** easternToLocalSys converts object from eastern to users system time zone.
+     * @param eastZdtObj  */
     public static ZonedDateTime easternToLocalSys (ZonedDateTime eastZdtObj) {
         ZoneId sysLocalZone = ZoneId.systemDefault();
         ZonedDateTime sysLocalZdtObject = ZonedDateTime.ofInstant(eastZdtObj.toInstant(), sysLocalZone);
@@ -38,6 +49,8 @@ public abstract class Time {
         return sysLocalZdtObject;
     }
 
+    /** getWeek calculates and returns start and end of current week.
+     * @param today  */
     public static LocalDateTime[] getWeek(LocalDateTime today){
         LocalDateTime[] startStop;
         startStop = new LocalDateTime[2];
