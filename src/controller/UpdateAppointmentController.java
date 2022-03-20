@@ -26,6 +26,10 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/** UpdateAppointmentController controls functionality and interactivity of update appointment screen.
+ * @author Lisa Cantrell
+ * */
+
 public class UpdateAppointmentController implements Initializable {
 
     Stage stage;
@@ -88,6 +92,8 @@ public class UpdateAppointmentController implements Initializable {
     public UpdateAppointmentController() throws SQLException {
     }
 
+    /** onActionCancel navigates back to main menu on click of cancel button.
+     * @param event  */
     @FXML
     void onActionCancel(ActionEvent event) {
         try {
@@ -98,6 +104,8 @@ public class UpdateAppointmentController implements Initializable {
 
     }
 
+    /** onActionDeleteAppt on click of button method creates confirmation alert and deletes from database.
+     * @param event  */
     @FXML
     void onActionDeleteAppt(ActionEvent event) throws SQLException {
 
@@ -117,6 +125,8 @@ public class UpdateAppointmentController implements Initializable {
         }
     }
 
+    /** onActionUpdateAppt on click of button method creates confirmation alert and updates in database.
+     * @param event  */
     @FXML
     void onActionUpdateAppt(ActionEvent event) throws SQLException {
         
@@ -170,6 +180,10 @@ public class UpdateAppointmentController implements Initializable {
 
     }
 
+    /** navigateViews navigates to screen found at provided path.
+     * @param viewPath
+     * @param event
+     * */
     public void navigateViews(String viewPath, ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource(viewPath));
@@ -177,6 +191,7 @@ public class UpdateAppointmentController implements Initializable {
         stage.show();
     }
 
+    /** allFieldsSelected confirms whether all fields have input and returns the appropriate boolean value. */
     public boolean allFieldsSelected(){
         if (updateApptTitleTxt.getText().isEmpty() ||
                 updateApptDescTxt.getText().isEmpty() ||
@@ -197,6 +212,16 @@ public class UpdateAppointmentController implements Initializable {
 
     }
 
+    /** hasOverlap method checks whether a specified start and stop time overlap any existing appointments for the specified customer.
+     *<p><b>
+     * uses  LAMBDA expression with a .forEach method to iterate through a list and process every item in the list
+     * the .forEach method is an easy to understand and implement way to process every item in a collection,
+     * and requires the use of a lambda.
+     *</b></p>
+     * @param aStart
+     * @param aEnd
+     * @param currCustId
+     */
     public static boolean hasOverlap(LocalDateTime aStart, LocalDateTime aEnd, int currCustId, int inputApptId) throws SQLException {
 
         ObservableList<Appointment> custAppts = AppointmentDB.selectByCust(currCustId);
@@ -231,6 +256,9 @@ public class UpdateAppointmentController implements Initializable {
         }
     }
 
+    /** sendAppt works with main menu controller to send data related to selected appointment to update appointment controller.
+     * @param appointment
+     * @param times  */
     public void sendAppt(Appointment appointment, ObservableList times) throws SQLException {
         updateApptIdTxt.setText(String.valueOf(appointment.getAppointmentId()));
         updateApptTitleTxt.setText(appointment.getTitle());
@@ -256,6 +284,10 @@ public class UpdateAppointmentController implements Initializable {
 
     }
 
+    /** initialize method sets up the stage for display.
+     * @param url
+     * @param resourceBundle
+     * */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }

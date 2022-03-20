@@ -24,6 +24,10 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+
+/** MainMenuController controls functionality and interactivity of Main Menu screen.
+ * @author Lisa Cantrell
+ * */
 public class MainMenuController implements Initializable {
 
     Stage stage;
@@ -105,6 +109,8 @@ public class MainMenuController implements Initializable {
     public MainMenuController() throws SQLException {
     }
 
+    /** onActionExit creates an alert to confirm exit of application.
+     * @param event  */
     @FXML
     void onActionExit(ActionEvent event) {
         Alert alert = Alerts.confirmExit();
@@ -113,6 +119,8 @@ public class MainMenuController implements Initializable {
         }
     }
 
+    /** onActionNavAddAppointment navigates to add appointment screen when button clicked.
+     * @param event  */
     @FXML
     void onActionNavAddAppointment(ActionEvent event) {
         try {
@@ -122,6 +130,8 @@ public class MainMenuController implements Initializable {
         }
     }
 
+    /** onActionNavAddCust navigates to add customer screen when button clicked.
+     * @param event  */
     @FXML
     void onActionNavAddCust(ActionEvent event) {
         try {
@@ -131,6 +141,8 @@ public class MainMenuController implements Initializable {
         }
     }
 
+    /** onActionNavModifyAppointment navigates to modify appointment screen when button clicked.
+     * @param event  */
     @FXML
     void onActionNavModifyAppointment(ActionEvent event) {
 
@@ -163,6 +175,8 @@ public class MainMenuController implements Initializable {
 
     }
 
+    /** onActionNavModifyCust navigates to modify customer screen when button clicked.
+     * @param event  */
     @FXML
     void onActionNavModifyCust(ActionEvent event) {
         try {
@@ -172,6 +186,8 @@ public class MainMenuController implements Initializable {
         }
     }
 
+    /** onActionNavReports navigates to reports screen when button clicked.
+     * @param event  */
     @FXML
     void onActionNavReports(ActionEvent event) {
         try {
@@ -180,6 +196,8 @@ public class MainMenuController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /** generateTimesList generates a list of appointment times within business hours. */
 
     public void generateTimesList() {
         for ( int i = 8; i < 23; i++) {
@@ -201,6 +219,8 @@ public class MainMenuController implements Initializable {
 
     }
 
+    /** onActionShowAll shows all appointments in database in the tableview when radio button selected.
+     * @param event  */
     @FXML
     void onActionShowAll(ActionEvent event) {
         mainAppointmentTableview.setItems(allAppointments);
@@ -216,12 +236,21 @@ public class MainMenuController implements Initializable {
         apptContactCol.setCellValueFactory(new PropertyValueFactory<>("assocContactId"));
     }
 
+    /** onActionShowByMonth shows current months appointments in database in the tableview when radio button selected.
+     * @param event  */
     @FXML
     void onActionShowByMonth(ActionEvent event) {
         LocalDateTime current = LocalDateTime.now();
         getMonth(current);
     }
 
+    /** onActionShowByWeek shows current weeks appointments in database in the tableview when radio button selected.
+     *<p><b>
+     * uses  LAMBDA expression with a .filter method to iterate through a list and filter based on a criteria
+     * the .filter method is an easy to understand and implement way to filter every item in a collection,
+     * and requires the use of a lambda.
+     *</b></p>
+     * @param event  */
     @FXML
     void onActionShowByWeek(ActionEvent event) {
         LocalDateTime current = LocalDateTime.now().with(LocalTime.of(0, 0));
@@ -251,7 +280,13 @@ public class MainMenuController implements Initializable {
     }
 
 
-
+/** getMonth calculates start and end of current month and populates obsevable list with all matching appointments.
+ *<p><b>
+ * uses  LAMBDA expression with a .filter method to iterate through a list and filter based on a criteria
+ * the .filter method is an easy to understand and implement way to filter every item in a collection,
+ * and requires the use of a lambda.
+ *</b></p>
+ * @param today  */
     public void getMonth(LocalDateTime today){
         LocalDateTime current = LocalDateTime.now();
         Month currMonth = current.getMonth();
@@ -280,15 +315,22 @@ public class MainMenuController implements Initializable {
 
     }
 
+    /** navigateViews navigates to screen found at provided path.
+     * @param viewPath
+     * @param event
+     * */
     public void navigateViews(String viewPath, ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource(viewPath));
         stage.setScene(new Scene(scene));
         stage.show();
     }
-    
 
 
+    /** initialize method sets up the stage for display.
+     * @param url
+     * @param resourceBundle
+     * */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

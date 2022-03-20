@@ -24,6 +24,11 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+
+/** AddCustomerController controls functionality and interactivity of add customer screen.
+ * @author Lisa Cantrell
+ * */
+
 public class AddCustomerController implements Initializable {
 
     Stage stage;
@@ -91,6 +96,8 @@ public class AddCustomerController implements Initializable {
     public AddCustomerController() throws SQLException {
     }
 
+    /** onActionAddCust method adds customer to database on click of add button.
+     * @param event */
     @FXML
     void onActionAddCust(ActionEvent event) throws SQLException {
         if(allFieldsSelected()){
@@ -112,6 +119,9 @@ public class AddCustomerController implements Initializable {
 
     }
 
+    /** onCountryCombo on selection of country from the combobox the method filters division
+     * by the country code. Then populates the division combobox.
+     * @param event  */
     @FXML
     void onCountryCombo(ActionEvent event) {
         filteredDivisions.clear();
@@ -130,6 +140,8 @@ public class AddCustomerController implements Initializable {
 
     }
 
+    /** onActionCancel navigates back to main menu on click of cancel button.
+     * @param event  */
     @FXML
     void onActionCancel(ActionEvent event) {
         try {
@@ -140,6 +152,7 @@ public class AddCustomerController implements Initializable {
 
     }
 
+    /** allFieldsSelected confirms whether all fields have input and returns the appropriate boolean value. */
     public boolean allFieldsSelected(){
         if ( addCustNameTxt.getText().isEmpty() ||
             addCustAdressTxt.getText().isEmpty() ||
@@ -156,6 +169,7 @@ public class AddCustomerController implements Initializable {
 
     }
 
+    /** addCustToDB calls database insert method to add a customer to customer database. */
     public void addCustToDB(String name, String address, String postal, String phone, Division division) throws SQLException {
 
         int divId = division.getDivisionId();
@@ -168,6 +182,10 @@ public class AddCustomerController implements Initializable {
 
     }
 
+    /** navigateViews navigates to screen found at provided path.
+     * @param viewPath
+     * @param event
+     * */
     public void navigateViews(String viewPath, ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource(viewPath));
@@ -175,6 +193,11 @@ public class AddCustomerController implements Initializable {
         stage.show();
     }
 
+
+    /** initialize method sets up the stage for display.
+     * @param url
+     * @param resourceBundle
+     * */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

@@ -22,6 +22,10 @@ import java.sql.SQLException;
 import java.time.Month;
 import java.util.ResourceBundle;
 
+
+/** ReportsController controls functionality and interactivity of reports screen.
+ * @author Lisa Cantrell
+ * */
 public class ReportsController implements Initializable {
 
     Stage stage;
@@ -121,6 +125,8 @@ public class ReportsController implements Initializable {
     @FXML
     private ComboBox<Contact> numApptbyContactCombo;
 
+    /** onActionContactCombo on selecting contact from combobox method populates tableview with appointments associated with the contact.
+     * @param event  */
     @FXML
     void onActionContactCombo(ActionEvent event) {
         schedule.clear();
@@ -135,6 +141,8 @@ public class ReportsController implements Initializable {
 
     }
 
+    /** onActionExit on clicking button navigates back to main menu screen.
+     * @param event  */
     @FXML
     void onActionExit(ActionEvent event) {
         try {
@@ -144,6 +152,8 @@ public class ReportsController implements Initializable {
         }
     }
 
+    /** onApptMonthCombo on selecting a month in combobox this method filters appointments in tableview to only the selected month.
+     * @param event  */
     @FXML
     void onApptMonthCombo(ActionEvent event){
         monthFiltered.clear();
@@ -159,6 +169,8 @@ public class ReportsController implements Initializable {
 
     }
 
+    /** onNumbyContactCombo on selecting a contact from the combo box this method calculates how many appointments that contact has.
+     * @param event  */
     @FXML
     void onNumbyContactCombo(ActionEvent event){
         int contactApptCounter = 0;
@@ -172,6 +184,8 @@ public class ReportsController implements Initializable {
 
     }
 
+    /** onTypeComboSelect on selecting a type from the combo box this method filters appointments in the tableview and populates the Month combobox.
+     * @param event  */
     @FXML
     void onTypeComboSelect(ActionEvent event){
         typeFiltered.clear();
@@ -194,6 +208,8 @@ public class ReportsController implements Initializable {
 
     }
 
+    /** getApptTypes gets a list of all appointment types by querying the database and processing the appointments returned.
+     * @param appointments  */
     public ObservableList<String> getApptTypes(ObservableList<Appointment> appointments){
         ObservableList<String> apptTypes = FXCollections.observableArrayList();
         for(Appointment appt : appointments){
@@ -204,6 +220,7 @@ public class ReportsController implements Initializable {
         return apptTypes;
     }
 
+    /** setMonthsList populates the months combo box. */
     public void setMonthsList(){
         months.clear();
         months.add(Month.JANUARY);
@@ -220,7 +237,10 @@ public class ReportsController implements Initializable {
         months.add(Month.DECEMBER);
     }
 
-
+    /** navigateViews navigates to screen found at provided path.
+     * @param viewPath
+     * @param event
+     * */
     public void navigateViews(String viewPath, ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource(viewPath));
@@ -228,6 +248,10 @@ public class ReportsController implements Initializable {
         stage.show();
     }
 
+    /** initialize method sets up the stage for display.
+     * @param url
+     * @param resourceBundle
+     * */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

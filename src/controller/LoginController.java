@@ -27,6 +27,11 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+
+
+/** LoginController controls functionality and interactivity of login screen.
+ * @author Lisa Cantrell
+ * */
 public class LoginController implements Initializable {
 
     Stage stage;
@@ -65,6 +70,9 @@ public class LoginController implements Initializable {
     public LoginController() throws SQLException {
     }
 
+
+/** onActionExitApplication creates an alert to confirm exit of application.
+ * @param event  */
     @FXML
     void onActionExitApplication(ActionEvent event) {
         Alert alert = Alerts.confirmExit();
@@ -72,6 +80,9 @@ public class LoginController implements Initializable {
             System.exit(0);
         }
     }
+
+    /** onActionLogin checks username and password combination and navigates to main menu on success.
+     * @param event  */
 
     @FXML
     void onActionLogin(ActionEvent event) {
@@ -116,6 +127,7 @@ public class LoginController implements Initializable {
         }
     }
 
+    /** checkFifteenMinWindow checks appointments in database for a start time within 15 minutes of login. */
     public void checkFifteenMinWindow(){
         LocalDate today = LocalDate.now();
         ArrayList<Appointment> windowAppts = new ArrayList<Appointment>();
@@ -141,6 +153,10 @@ public class LoginController implements Initializable {
         }
     }
 
+    /** navigateViews navigates to screen found at provided path.
+     * @param viewPath
+     * @param event
+     * */
     public void navigateViews(String viewPath, ActionEvent event) throws IOException{
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource(viewPath));
@@ -148,6 +164,10 @@ public class LoginController implements Initializable {
         stage.show();
     }
 
+    /** initialize method sets up the stage for display.
+     * @param url
+     * @param resourceBundle
+     * */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

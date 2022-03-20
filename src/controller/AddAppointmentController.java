@@ -24,6 +24,10 @@ import java.time.*;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/** AddAppointmentController controls functionality and interactivity of add appointment screen.
+ * @author Lisa Cantrell
+ * */
+
 public class AddAppointmentController implements Initializable {
 
     Stage stage;
@@ -76,7 +80,8 @@ public class AddAppointmentController implements Initializable {
     public AddAppointmentController() throws SQLException {
     }
 
-
+    /** onActionAddAppt method adds appointment to database on click of add button.
+     * @param event */
     @FXML
     void onActionAddAppt(ActionEvent event) throws SQLException {
 
@@ -129,6 +134,8 @@ public class AddAppointmentController implements Initializable {
 
     }
 
+    /** onActionCancel navigates back to main menu on click of cancel button.
+     * @param event  */
     @FXML
     void onActionCancel(ActionEvent event) {
         try {
@@ -144,6 +151,10 @@ public class AddAppointmentController implements Initializable {
 
     }
 
+    /** navigateViews navigates to screen found at provided path.
+     * @param viewPath
+     * @param event
+     * */
     public void navigateViews(String viewPath, ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource(viewPath));
@@ -151,6 +162,7 @@ public class AddAppointmentController implements Initializable {
         stage.show();
     }
 
+    /** generateTimesList generates a list of appointment times within business hours. */
     public void generateTimesList() {
         for ( int i = 8; i < 23; i++) {
             LocalDate selectedDate = addApptStartDatePick.getValue();
@@ -171,6 +183,7 @@ public class AddAppointmentController implements Initializable {
 
     }
 
+    /** allFieldsSelected confirms whether all fields have input and returns the appropriate boolean value. */
     public boolean allFieldsSelected(){
         if (addApptTitletxt.getText().isEmpty() ||
             addApptDescTxt.getText().isEmpty() ||
@@ -191,6 +204,7 @@ public class AddAppointmentController implements Initializable {
 
     }
 
+    /** addApptToDB calls database insert method to add an appointment to appointment database. */
     public void addApptToDB(String title, String desc, String location, String type,
                             LocalDateTime start, LocalDateTime end, int custId,
                             int userId, int contactId) throws SQLException {
@@ -201,6 +215,16 @@ public class AddAppointmentController implements Initializable {
         }
     }
 
+    /** hasOverlap method checks whether a specified start and stop time overlap any existing appointments for the specified customer.
+     *<p><b>
+     * uses  LAMBDA expression with a .forEach method to iterate through a list and process every item in the list
+     * the .forEach method is an easy to understand and implement way to process every item in a collection,
+     * and requires the use of a lambda.
+     *</b></p>
+     * @param aStart
+     * @param aEnd
+     * @param currCustId
+     */
     public static boolean hasOverlap(LocalDateTime aStart, LocalDateTime aEnd, int currCustId) throws SQLException {
 
         ObservableList<Appointment> custAppts = AppointmentDB.selectByCust(currCustId);
@@ -228,7 +252,10 @@ public class AddAppointmentController implements Initializable {
         }
     }
 
-
+    /** initialize method sets up the stage for display.
+     * @param url
+     * @param resourceBundle
+     * */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

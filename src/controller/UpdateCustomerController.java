@@ -27,6 +27,10 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/** UpdateCustomerController controls functionality and interactivity of update customer screen.
+ * @author Lisa Cantrell
+ * */
+
 public class UpdateCustomerController implements Initializable {
 
     Stage stage;
@@ -96,6 +100,8 @@ public class UpdateCustomerController implements Initializable {
     public UpdateCustomerController() throws SQLException {
     }
 
+    /** onActionCancel navigates back to main menu on click of cancel button.
+     * @param event  */
     @FXML
     void onActionCancel(ActionEvent event) {
         Alert alert = Alerts.customConfirmationAlert("Do you want to discard any changes?");
@@ -111,6 +117,9 @@ public class UpdateCustomerController implements Initializable {
 
     }
 
+    /** onClickCheckSelection on clicking the tableview checks for a selection and populates input fields with info
+     * from selected customer.
+     * @param event  */
     @FXML
     void onClickCheckSelection(MouseEvent event){
         filteredDivisions.clear();
@@ -144,6 +153,9 @@ public class UpdateCustomerController implements Initializable {
 
     }
 
+    /** onCountryCombo on selection of country from the combobox the method filters division
+     * by the country code. Then populates the division combobox.
+     * @param event  */
     @FXML
     void onCountryCombo(ActionEvent event) {
         filteredDivisions.clear();
@@ -156,6 +168,8 @@ public class UpdateCustomerController implements Initializable {
         updateCustDivCombo.setItems(filteredDivisions);
     }
 
+    /** onActionDeleteCust on click of button method creates confirmation alert and deletes from database.
+     * @param event  */
     @FXML
     void onActionDeleteCust(ActionEvent event) throws SQLException {
         if(updateCustTableview.getSelectionModel().getSelectedItem() != null){
@@ -185,6 +199,8 @@ public class UpdateCustomerController implements Initializable {
         }
     }
 
+    /** onActionUpdateCust on click of button method creates confirmation alert and updates in database.
+     * @param event  */
     @FXML
     void onActionUpdateCust(ActionEvent event) throws SQLException {
 
@@ -206,12 +222,12 @@ public class UpdateCustomerController implements Initializable {
                 e.printStackTrace();
             }
         }
-
-
-
-
     }
 
+    /** navigateViews navigates to screen found at provided path.
+     * @param viewPath
+     * @param event
+     * */
     public void navigateViews(String viewPath, ActionEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource(viewPath));
@@ -219,6 +235,10 @@ public class UpdateCustomerController implements Initializable {
         stage.show();
     }
 
+    /** initialize method sets up the stage for display.
+     * @param url
+     * @param resourceBundle
+     * */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
