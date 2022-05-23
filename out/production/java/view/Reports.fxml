@@ -5,13 +5,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReportsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReportsController">
     <top>
         <AnchorPane prefHeight="85.0" prefWidth="200.0" style="-fx-background-color: #845ec2 #845ec2;" BorderPane.alignment="CENTER">
             <children>
@@ -34,40 +35,26 @@
         </AnchorPane>
     </top>
    <center>
-        <AnchorPane prefHeight="366.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="reportsExitButton" layoutX="15.0" layoutY="363.0" mnemonicParsing="false" onAction="#onActionExit" prefHeight="27.0" prefWidth="116.0" style="-fx-background-color: #4d8076#4d8076;" text="Exit Reports" textFill="#dddddd">
+                <Button fx:id="reportsExitButton" layoutX="15.0" layoutY="455.0" mnemonicParsing="false" onAction="#onActionExit" prefHeight="27.0" prefWidth="116.0" style="-fx-background-color: #4d8076#4d8076;" text="Exit Reports" textFill="#dddddd">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Button>
             <Label layoutX="14.0" layoutY="14.0" text="Appointments by Type and Month" textFill="#4d8076" />
-            <TableView fx:id="apptTypeMonthTableView" layoutX="39.0" layoutY="43.0" prefHeight="102.0" prefWidth="566.0">
-              <columns>
-                <TableColumn fx:id="apptIdCol" prefWidth="75.0" text="Appt ID" />
-                <TableColumn fx:id="apptTitleCol" prefWidth="75.0" text="Title" />
-                  <TableColumn fx:id="apptDescCol" prefWidth="75.0" text="Description" />
-                  <TableColumn fx:id="apptLocCol" prefWidth="37.0" text="Location" />
-                  <TableColumn fx:id="apptTypeCol" prefWidth="44.0" text="Type" />
-                  <TableColumn fx:id="apptStartCol" prefWidth="42.0" text="Start" />
-                  <TableColumn fx:id="apptEndCol" prefWidth="42.0" text="End" />
-                  <TableColumn fx:id="apptCustCol" prefWidth="53.0" text="Customer" />
-                  <TableColumn fx:id="apptUserCol" prefWidth="55.0" text="User" />
-                  <TableColumn fx:id="apptContactCol" prefWidth="55.0" text="Contact" />
-              </columns>
-            </TableView>
             <ComboBox fx:id="apptTypeCombo" layoutX="243.0" layoutY="10.0" onAction="#onTypeComboSelect" prefWidth="150.0" />
             <ComboBox fx:id="apptMonthCombo" layoutX="411.0" layoutY="10.0" onAction="#onApptMonthCombo" prefWidth="150.0" />
-            <Label layoutX="14.0" layoutY="156.0" text="Contact Schedules" textFill="#4d8076" />
-            <Label layoutX="11.0" layoutY="303.0" prefHeight="17.0" prefWidth="208.0" text="Number of Appointments by Contact" textFill="#4d8076" />
-            <Label fx:id="numApptResult" layoutX="50.0" layoutY="320.0" prefHeight="25.0" prefWidth="45.0" textFill="#4d8076">
+            <Label layoutX="21.0" layoutY="263.0" text="Contact Schedules" textFill="#4d8076" />
+            <Label layoutX="14.0" layoutY="407.0" prefHeight="17.0" prefWidth="208.0" text="Number of Appointments by Contact" textFill="#4d8076" />
+            <Label fx:id="numApptResult" layoutX="425.0" layoutY="403.0" prefHeight="25.0" prefWidth="45.0" textFill="#4d8076">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <ComboBox fx:id="contactCombo" layoutX="243.0" layoutY="152.0" onAction="#onActionContactCombo" prefWidth="150.0" />
-            <ComboBox fx:id="numApptbyContactCombo" layoutX="247.0" layoutY="307.0" onAction="#onNumbyContactCombo" prefWidth="150.0" />
-            <TableView fx:id="contactScheduleTableview" layoutX="39.0" layoutY="188.0" prefHeight="102.0" prefWidth="566.0">
+            <ComboBox fx:id="contactCombo" layoutX="174.0" layoutY="259.0" onAction="#onActionContactCombo" prefWidth="150.0" />
+            <ComboBox fx:id="numApptbyContactCombo" layoutX="247.0" layoutY="403.0" onAction="#onNumbyContactCombo" prefWidth="150.0" />
+            <TableView fx:id="contactScheduleTableview" layoutX="42.0" layoutY="286.0" prefHeight="102.0" prefWidth="566.0">
                <columns>
                   <TableColumn fx:id="apptIdCol1" prefWidth="75.0" text="Appt ID" />
                   <TableColumn fx:id="apptTitleCol1" prefWidth="75.0" text="Title" />
@@ -81,6 +68,28 @@
                   <TableColumn fx:id="apptContactCol1" prefWidth="55.0" text="Contact" />
                </columns>
             </TableView>
+            <Label fx:id="numApptsLabel" layoutX="90.0" layoutY="60.0" text="Number of Appointments:" textFill="#4d8076" />
+            <Label fx:id="apptTotalLabel" layoutX="247.0" layoutY="55.0" prefHeight="30.0" prefWidth="109.0" textFill="#4d8076">
+                <font>
+                    <Font size="20.0" />
+                </font>
+            </Label>
+            <TableView fx:id="apptByCustTableview" layoutX="42.0" layoutY="141.0" prefHeight="102.0" prefWidth="566.0">
+                <columns>
+                    <TableColumn fx:id="apptIdCol11" prefWidth="75.0" text="Appt ID" />
+                    <TableColumn fx:id="apptTitleCol11" prefWidth="75.0" text="Title" />
+                    <TableColumn fx:id="apptDescCol11" prefWidth="75.0" text="Description" />
+                    <TableColumn fx:id="apptLocCol11" prefWidth="37.0" text="Location" />
+                    <TableColumn fx:id="apptTypeCol11" prefWidth="44.0" text="Type" />
+                    <TableColumn fx:id="apptStartCol11" prefWidth="42.0" text="Start" />
+                    <TableColumn fx:id="apptEndCol11" prefWidth="42.0" text="End" />
+                    <TableColumn fx:id="apptCustCol11" prefWidth="53.0" text="Customer" />
+                    <TableColumn fx:id="apptUserCol11" prefWidth="55.0" text="User" />
+                    <TableColumn fx:id="apptContactCol11" prefWidth="55.0" text="Contact" />
+                </columns>
+            </TableView>
+            <Label layoutX="14.0" layoutY="109.0" text="Appointments by Customer" textFill="#4d8076" />
+            <TextField fx:id="searchNameTextView" layoutX="175.0" layoutY="108.0" onAction="#onActionSearchName" promptText="Search by name" />
             </children>
         </AnchorPane>
    </center>

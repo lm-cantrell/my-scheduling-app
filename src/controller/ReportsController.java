@@ -2,6 +2,7 @@ package controller;
 
 import DB.AppointmentDB;
 import DB.ContactDB;
+import DB.CustomerDB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
 import model.Contact;
+import model.Customer;
 
 import java.io.IOException;
 import java.net.URL;
@@ -45,61 +47,67 @@ public class ReportsController implements Initializable {
     private Button reportsExitButton;
 
     @FXML
-    private TableColumn<?, ?> apptContactCol;
+    private Label apptTotalLabel;
+
+    @FXML
+    private Label numApptsLabel;
+
+    @FXML
+    private TableColumn<?, ?> apptContactCol11;
 
     @FXML
     private TableColumn<?, ?> apptContactCol1;
 
     @FXML
-    private TableColumn<?, ?> apptCustCol;
+    private TableColumn<?, ?> apptCustCol11;
 
     @FXML
     private TableColumn<?, ?> apptCustCol1;
 
     @FXML
-    private TableColumn<?, ?> apptDescCol;
+    private TableColumn<?, ?> apptDescCol11;
 
     @FXML
     private TableColumn<?, ?> apptDescCol1;
 
     @FXML
-    private TableColumn<?, ?> apptEndCol;
+    private TableColumn<?, ?> apptEndCol11;
 
     @FXML
     private TableColumn<?, ?> apptEndCol1;
 
     @FXML
-    private TableColumn<?, ?> apptIdCol;
+    private TableColumn<?, ?> apptIdCol11;
 
     @FXML
     private TableColumn<?, ?> apptIdCol1;
 
     @FXML
-    private TableColumn<?, ?> apptLocCol;
+    private TableColumn<?, ?> apptLocCol11;
 
     @FXML
     private TableColumn<?, ?> apptLocCol1;
 
     @FXML
-    private TableColumn<?, ?> apptStartCol;
+    private TableColumn<?, ?> apptStartCol11;
 
     @FXML
     private TableColumn<?, ?> apptStartCol1;
 
     @FXML
-    private TableColumn<?, ?> apptTitleCol;
+    private TableColumn<?, ?> apptTitleCol11;
 
     @FXML
     private TableColumn<?, ?> apptTitleCol1;
 
     @FXML
-    private TableColumn<?, ?> apptTypeCol;
+    private TableColumn<?, ?> apptTypeCol11;
 
     @FXML
     private TableColumn<?, ?> apptTypeCol1;
 
     @FXML
-    private TableColumn<?, ?> apptUserCol;
+    private TableColumn<?, ?> apptUserCol11;
 
     @FXML
     private TableColumn<?, ?> apptUserCol1;
@@ -113,14 +121,18 @@ public class ReportsController implements Initializable {
     @FXML
     private ComboBox<String> apptTypeCombo;
 
+
     @FXML
-    private TableView<Appointment> apptTypeMonthTableView;
+    private TableView<Appointment> apptByCustTableview;
 
     @FXML
     private ComboBox<Contact> contactCombo;
 
     @FXML
     private Label numApptResult;
+
+    @FXML
+    private TextField searchNameTextView;
 
     @FXML
     private ComboBox<Contact> numApptbyContactCombo;
@@ -141,6 +153,15 @@ public class ReportsController implements Initializable {
 
     }
 
+    @FXML
+    void onActionSearchName(ActionEvent event) throws SQLException {
+        String searchText = searchNameTextView.getText();
+        ObservableList<Appointment> apptResults = searchByCustomerName(searchText);
+
+        apptByCustTableview.setItems(apptResults);
+
+    }
+
     /** onActionExit on clicking button navigates back to main menu screen.
      * @param event  */
     @FXML
@@ -157,7 +178,7 @@ public class ReportsController implements Initializable {
     @FXML
     void onApptMonthCombo(ActionEvent event){
         monthFiltered.clear();
-        apptTypeMonthTableView.setItems(typeFiltered);
+//        apptTypeMonthTableView.setItems(typeFiltered);
 
         Month selectedMonth = apptMonthCombo.getValue();
         for(Appointment appt : typeFiltered){
@@ -165,7 +186,8 @@ public class ReportsController implements Initializable {
                 monthFiltered.add(appt);
             }
         }
-        apptTypeMonthTableView.setItems(monthFiltered);
+        int numAppts = monthFiltered.size();
+        apptTotalLabel.setText(String.valueOf(numAppts));
 
     }
 
@@ -199,7 +221,8 @@ public class ReportsController implements Initializable {
             }
         }
 
-        apptTypeMonthTableView.setItems(typeFiltered);
+        int numApptByType = typeFiltered.size();
+        apptTotalLabel.setText(String.valueOf(numApptByType));
 
         setMonthsList();
         apptMonthCombo.setItems(months);
@@ -248,6 +271,20 @@ public class ReportsController implements Initializable {
         stage.show();
     }
 
+    public ObservableList<Appointment> searchByCustomerName(String partialName) throws SQLException {
+        ObservableList<Appointment> custAppts = FXCollections.observableArrayList();
+        ObservableList<Appointment> allAppts = AppointmentDB.select();
+        for( Appointment appt : allAppts) {
+            int custId = appt.getAssocCustId();
+            Customer currCust = CustomerDB.select(custId);
+            if(currCust.getCustomerName().contains(partialName)) {
+                custAppts.add(appt);
+            }
+        }
+
+        return custAppts;
+    }
+
     /** initialize method sets up the stage for display.
      * @param url
      * @param resourceBundle
@@ -279,17 +316,17 @@ public class ReportsController implements Initializable {
         numApptbyContactCombo.setPromptText("Select a Contact ...");
         numApptbyContactCombo.setItems(allContacts);
 
-        apptTypeMonthTableView.setItems(allAppointments);
-        apptIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
-        apptTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-        apptDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
-        apptLocCol.setCellValueFactory(new PropertyValueFactory<>("location"));
-        apptTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        apptStartCol.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
-        apptEndCol.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
-        apptCustCol.setCellValueFactory(new PropertyValueFactory<>("assocCustId"));
-        apptUserCol.setCellValueFactory(new PropertyValueFactory<>("assocCustId"));
-        apptContactCol.setCellValueFactory(new PropertyValueFactory<>("assocContactId"));
+
+        apptIdCol11.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        apptTitleCol11.setCellValueFactory(new PropertyValueFactory<>("title"));
+        apptDescCol11.setCellValueFactory(new PropertyValueFactory<>("description"));
+        apptLocCol11.setCellValueFactory(new PropertyValueFactory<>("location"));
+        apptTypeCol11.setCellValueFactory(new PropertyValueFactory<>("type"));
+        apptStartCol11.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
+        apptEndCol11.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
+        apptCustCol11.setCellValueFactory(new PropertyValueFactory<>("assocCustId"));
+        apptUserCol11.setCellValueFactory(new PropertyValueFactory<>("assocCustId"));
+        apptContactCol11.setCellValueFactory(new PropertyValueFactory<>("assocContactId"));
 
         apptIdCol1.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         apptTitleCol1.setCellValueFactory(new PropertyValueFactory<>("title"));

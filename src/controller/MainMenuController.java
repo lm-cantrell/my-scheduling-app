@@ -200,7 +200,7 @@ public class MainMenuController implements Initializable {
     /** generateTimesList generates a list of appointment times within business hours. */
 
     public void generateTimesList() {
-        for ( int i = 8; i < 23; i++) {
+        for ( int i = 8; i < 22; i++) {
             LocalDate date = LocalDate.now();
             LocalTime thisTime = LocalTime.of(i, 0);
             LocalTime thisHalfTime = LocalTime.of(i, 30);
@@ -346,9 +346,11 @@ public class MainMenuController implements Initializable {
         apptUserCol.setCellValueFactory(new PropertyValueFactory<>("assocCustId"));
         apptContactCol.setCellValueFactory(new PropertyValueFactory<>("assocContactId"));
 
+        ZoneId thisZone = ZoneId.systemDefault();
+
 
         System.out.println("I'm initialized");
-
+        System.out.println("My timezone is: " + thisZone);
 
     }
 }

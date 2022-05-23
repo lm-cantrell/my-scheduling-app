@@ -1,2 +1,8 @@
 Attempt to login with username: test at 2022-03-19T11:43:03.162046 was successful.
 Attempt to login with username: testLoginFail at 2022-03-19T11:44:21.067909 failed.
+Attempt to login with username: admin at 2022-05-23T16:48:55.484559 was successful.
+Attempt to login with username: admin at 2022-05-23T16:53:19.800188 was successful.
+Attempt to login with username: admin at 2022-05-23T17:01:14.070193 was successful.
+Attempt to login with username: admin at 2022-05-23T17:05:55.408846 was successful.
+Attempt to login with username: admin at 2022-05-23T17:08:54.784740 was successful.
+Attempt to login with username: admin at 2022-05-23T17:09:55.674704 was successful.

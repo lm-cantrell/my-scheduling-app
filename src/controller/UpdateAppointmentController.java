@@ -261,6 +261,7 @@ public class UpdateAppointmentController implements Initializable {
      * @param times  */
     public void sendAppt(Appointment appointment, ObservableList times) throws SQLException {
         updateApptIdTxt.setText(String.valueOf(appointment.getAppointmentId()));
+        updateApptIdTxt.setEditable(false);
         updateApptTitleTxt.setText(appointment.getTitle());
         updateApptDescTxt.setText(appointment.getDescription());
         updateApptLocationTxt.setText(appointment.getLocation());

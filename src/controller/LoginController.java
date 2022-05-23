@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -173,10 +174,11 @@ public class LoginController implements Initializable {
         try {
             Locale locale = Locale.getDefault();
 //            Locale locale = Locale.FRANCE;
+            ZoneId thisZone = ZoneId.systemDefault();
             resourceBundle = ResourceBundle.getBundle("assets/Nat", locale);
 
             regionLabel.setText(resourceBundle.getString("region"));
-            regionDetailsLabel.setText(String.valueOf(locale));
+            regionDetailsLabel.setText(String.valueOf(thisZone));
             exitButton.setText(resourceBundle.getString("cancel"));
             loginButton.setText(resourceBundle.getString("login"));
             passwordLabel.setText(resourceBundle.getString("password"));
