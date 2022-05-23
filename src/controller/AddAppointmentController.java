@@ -164,7 +164,7 @@ public class AddAppointmentController implements Initializable {
 
     /** generateTimesList generates a list of appointment times within business hours. */
     public void generateTimesList() {
-        for ( int i = 8; i < 23; i++) {
+        for ( int i = 8; i < 22; i++) {
             LocalDate selectedDate = addApptStartDatePick.getValue();
             LocalTime thisTime = LocalTime.of(i, 0);
             LocalTime thisHalfTime = LocalTime.of(i, 30);
@@ -258,6 +258,8 @@ public class AddAppointmentController implements Initializable {
      * */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        addApptIdTxt.setEditable(false);
 
         addApptStartDatePick.setValue(LocalDate.now());
 
