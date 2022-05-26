@@ -7,22 +7,6 @@
     <list default="true" id="9dde9f8b-37ff-4191-9fbb-6a987152dca0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login_activity.txt" beforeDir="false" afterPath="$PROJECT_DIR$/login_activity.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/controller/AddAppointmentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java/controller/AddAppointmentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/controller/AddCustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java/controller/AddCustomerController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/controller/MainMenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java/controller/MainMenuController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/controller/ReportsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java/controller/ReportsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/controller/UpdateAppointmentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java/controller/UpdateAppointmentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/controller/UpdateCustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java/controller/UpdateCustomerController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/view/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java/view/Login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/view/Reports.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java/view/Reports.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ReportsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ReportsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/UpdateAppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/UpdateAppointmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/Reports.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Reports.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +42,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
@@ -96,7 +80,9 @@
       <workItem from="1647905751923" duration="657000" />
       <workItem from="1648076701795" duration="274000" />
       <workItem from="1653340711417" duration="135000" />
-      <workItem from="1653341115085" duration="5342000" />
+      <workItem from="1653341115085" duration="5650000" />
+      <workItem from="1653358650287" duration="252000" />
+      <workItem from="1653529165075" duration="1340000" />
     </task>
     <servers />
   </component>

@@ -37,7 +37,7 @@ public class Alerts {
      * @param message  */
     public static Alert customInfoAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Appointment informagion");
+        alert.setTitle("Appointment information");
         alert.setContentText(message);
         return alert;
     }
